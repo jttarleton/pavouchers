@@ -1,0 +1,160 @@
+/*----- 1 Typography -----*/
+
+body {
+  font-family: 'Karla', sans-serif;
+  font-weight:400;
+  letter-spacing: -0.015em;
+}
+
+h1,h2,h3, h4, h5 {
+	font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/*Links*/
+a {
+  color: #989898;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  color: #000000;
+}
+a:active {
+  color: #000000;
+}
+
+
+/* ----- Header and Map Area -----*/
+
+#header{
+    position: fixed;
+    text-align:center;
+    margin: 0;
+    width:100%;
+    z-index: 10;
+    /*
+    background-image: -moz-linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    background-image: -ms-linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(255, 255, 255, 1)), to(rgba(0, 0, 0, 0)));
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    background-image: -o-linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(255, 255, 255, 1)', endColorstr='rgba(0, 0, 0, 0)', GradientType=1);
+    padding: 2rem 0;
+    */
+}
+
+#map {
+  width:auto;
+  height:180px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+#space {
+    height:200px;
+}
+
+.affix {
+    position:fixed;
+    margin:auto;
+    top: 0;
+}
+
+.counties :hover {
+  fill: red;
+}
+
+.county-borders {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+/* ----- D3 Styling ----- */
+
+#bubbles {
+}
+
+
+.states {
+    fill: none;
+    stroke: #fff;
+    stroke-linejoin: round;
+}
+
+/* ----- County Dropdown -----*/
+.dropbtn {
+    /* display: none;*/
+    background-color: white;
+    color: black;
+    padding: 1px;
+    font-size: 16px;
+    font-weight: bold;
+    border: solid 1px;
+    cursor: pointer;
+    width: 250px;
+    margin-top: 20px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    /*display: none;*/
+    display: block;
+    width:250px;
+    margin: 0 auto;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #ffffff;
+    border: solid 1px;
+    /*min-width: 350px; */
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: black;
+    color: white;
+  }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: black;
+    color: white;
+    border: solid black 1px;
+}
+
+/* ----- Bubbles ----- */
+circle {
+  stroke: #fff;
+}
+
+#bubbles {
+  /* border: solid 2px blue; */
+  margin-left:auto;
+  margin-right:auto;
+  display: block;
+  text-align: center;
+}
