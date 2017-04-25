@@ -225,7 +225,7 @@ var width = 800,
     clusterPadding = 6, // separation between different-color nodes
     maxRadius = 2;
 
-var n = 3000, // total number of nodes
+var n = 1000, // total number of nodes
     m = 2; // number of distinct clusters
 
 
@@ -274,10 +274,10 @@ var svg2 = d3.select("#bubbles").append("svg")
 var node = svg2.selectAll("circle")
     .data(nodes)
   .enter().append("circle")
-  	.style("fill", "white")
+  	/*.style("fill", "white")*/
   	.style("stroke", "black")
   	.style("stroke-width", "1px")
-    /* .style("fill", function(d) { return bubbleColor(d.cluster/10); }); */
+    .style("fill", function(d) { return bubbleColor(d.cluster/10); });
 
 
 
