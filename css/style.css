@@ -45,10 +45,16 @@ a:active {
     */
 }
 
+#countyname {
+  font-size: 20px;
+  height: 5px;
+  padding-top: 9px;
+}
+
 #map {
   width:auto;
   margin: 0 auto;
-  padding-top: 10px;
+  padding-top: 0px;
 }
 
 #space {
@@ -151,9 +157,10 @@ circle {
 }
 
 #bubbles {
-  /* border: solid 2px blue; */
+  /*border: solid 2px blue;*/
   margin-left:auto;
   margin-right:auto;
   display: block;
   text-align: center;
+  height: 400px;
 }
