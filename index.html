@@ -24,6 +24,8 @@
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/topojson.v2.min.js"></script>
 
+<!-- Data -->
+
 </head>
 
 <body>
@@ -46,9 +48,22 @@
 <div class="container">
 
 	<div class="row">
-			<div class="col-md-4" style="z-index: 20;">
+			<div class="col-md-4 col-md-offset-4" style="z-index: 20;">
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
 			<h1>Vouchers and Votes in the Keystone State</h1>
-			<p>by Zach Postone and Jonathan Tarleton</p>
+			</div>
+			<div id="space"></div>
+			<div class="col-md-4 col-md-offset-4" style="z-index:0;">
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<p>By Zach Postone and Jonathan Tarleton</p>
 			</div>
 
 	</div>
@@ -69,7 +84,18 @@
 	<div class="row">
 	<br />
 	</div>
-
+	<div class="row">
+	<br />
+	</div>
+	<div class="row">
+	<br />
+	</div>
+    <div class="row">
+	<br />
+	</div>
+    <div class="row">
+	<br />
+	</div>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 		<h2>The Burden of Housing</h2>
@@ -151,14 +177,19 @@
   <div id="space">
 </div>
 
+<div id="space"></div>
+<div id="space"></div>
+<div id="space"></div>
+<div id="space"></div>
+
 
 <!-- D3 Script for the header map -->
 
 <script>
 
 // Width and Height of the whole visualization
-var width = 500;
-var height = 185;
+var width = 600;
+var height = 300;
 
 // Create SVG
 var svg = d3.select("#map")
@@ -171,7 +202,7 @@ var svg = d3.select("#map")
 var proj = d3.geoAlbers()
     .rotate( [77.727836,0] )
     .center( [0, 40.964551] )
-    .scale(4000)
+    .scale(6000)
     .translate( [width/2,height/2] );
 
 // Create GeoPath function that uses built-in D3 functionality to turn
@@ -206,12 +237,12 @@ function ready(error, pa) {
     .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
     .enter().append("path")
     .attr("d", path)
-    .style("stroke", "white")
+    .style("stroke", "lightgrey")
     .style("stroke-width","1px")
-    /*.style("fill", "white");*/
-    .style("fill", function(d) {
+    .style("fill", "white");
+    /*.style("fill", function(d) {
     	return color(d.properties.BRD_T_P);
-    });
+    });*/
 }
 
 </script>
@@ -219,32 +250,57 @@ function ready(error, pa) {
 <!-- Script for the D3 Bubbles -->
 <script>
 
-d3.queue()
-    .defer(d3.json, "data/hcv_pa_simp.json")
-    .await(ready);
-
-d3.json("data/hcv_pa_simp.json", function(error, text) {
-  if (error) throw error;
-  /*var colNames = "text,size,group\n" + text;*/
-  var data = 5;
-  /*data.forEach(function(d) {
-    d.size = +d.size;
-  }
-  );*/
-//unique cluster/group id's
-var cs = [];
-/*data.forEach(function(d){
-        if(!cs.contains(d.group)) {
-            cs.push(d.group);
-        }
-});
-*/
-
 var width = 800,
     height = 500,
     padding = 2, // separation between same-color nodes
     clusterPadding = 6, // separation between different-color nodes
     maxRadius = 2;
+
+var svg2 = d3.select( "bubbles" )
+    .append( "svg" )
+    .attr( "width", width )
+    .attr( "height", height );
+
+function geoFilter(d) {
+    return d.properties.GEOID == 42001;
+}
+
+d3.queue()
+    .defer(d3.json, "data/hcv_pa_simp.json")
+    .await(ready);
+
+function ready(error, pa) {
+  if (error) throw error;
+
+svg.append("g")
+  .attr("class", "PA_Counties_jc")
+  .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features);
+
+selCounty = geoFilter(pa)
+console.log(selCounty);
+
+}
+
+  /*var selCounty = paObjects.filter(function(pa){
+  return pa.properties.GEOID == 42001;
+  console.log(selCounty);*/
+
+/*
+
+  var colNames = "text,size,group\n" + text;
+  var data = 5;
+  data.forEach(function(d) {
+    d.size = +d.size;
+  }
+  );
+//unique cluster/group id's
+var cs = [];
+data.forEach(function(d){
+        if(!cs.contains(d.group)) {
+            cs.push(d.group);
+        }
+});
+
 
 var n = 2345, // this should be the value ELIG_B "Eligible households that are housing cost burdened", total pop
     m = 2; // number of distinct clusters - we want to split it into two groups
@@ -352,6 +408,8 @@ Array.prototype.contains = function(v) {
     }
     return false;
 };
+
+*/
 </script>
 
 
