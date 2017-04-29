@@ -217,6 +217,8 @@ var width2 = 600,
 var center = {x: width / 2, y: height / 2};
 var forceStrength = 0.03;
 
+
+
 // new v4 force simulation creation
 var simulation = d3.forceSimulation()
 	.velocityDecay(0.2)
@@ -229,8 +231,23 @@ var simulation = d3.forceSimulation()
 var myNodes = [{name:'a'}, {name:'b'}, {name:'c'}];
 simulation.nodes(myNodes);
 
+//testing passing elig to an array
+//change this so it passes a value of "served" until value of served runs out (while) and then fills the rest of the array with "unserved"
+
+//Then figure out a cluster by the value "served" vs "unserved"
+//https://bl.ocks.org/ctufts/f38ef0187f98c537d791d24fda4a6ef9
+
+eligR = d3.range(elig);
+var test = {}
+
+for (i in eligR) {
+	test[i] = "served";
+}
+console.log(test);
+
+
 // Example of adding the centering force to the simulation, which keeps nodes centered on a particular point
-simulation.force('center', d3.forceCenter(width / 2, height / 2));
+/*simulation.force('center', d3.forceCenter(width / 2, height / 2));*/
 
 
 //Here is what the charge function looks like that is passed in as the force’s strength:
