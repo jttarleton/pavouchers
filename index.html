@@ -176,7 +176,9 @@ d3.queue()
     .defer(d3.json, "data/hcv_pa_simp.json")
     .await(ready);
 
-var elig = 10;
+
+var unserved = 0;
+var served = 0;
 
 function ready(error, pa) {
   if (error) throw error;
@@ -195,8 +197,10 @@ function ready(error, pa) {
     });*/
     .on("click", function(d){
 		d3.select("#countyname").text(d.properties.NAMELSAD);
-		elig = +d.properties.ELIG_B;
-		console.log(elig);
+		unserved = +d.properties.ELIGBUNT;
+		served = +d.properties.HCV;
+		console.log("unserved: " +unserved);
+		console.log("served: " +served);
 		/*d3.selectAll("circle").remove();
 		drawBubbles()*/
 	});
@@ -214,22 +218,58 @@ var width2 = 600,
     height2 = 400;
 
 // constants used in the simulation
-var center = {x: width / 2, y: height / 2};
+/*var center = {x: width2 / 2, y: height2 / 2};
 var forceStrength = 0.03;
 
-
+//Here is what the charge function looks like that is passed in as the force’s strength:
+function charge(d) {
+  return -forceStrength * Math.pow(d.radius, 2.0);
+}
+*/
+//The ticked function for this is super simple, as it just moves the SVG circles used to make the bubbles to their new positions:
+function ticked() {
+  bubbles
+    .attr('cx', function (d) { return d.x; })
+    .attr('cy', function (d) { return d.y; });
+}
 
 // new v4 force simulation creation
 var simulation = d3.forceSimulation()
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width2 / 2, height2 / 2))
+    .on('tick', ticked);
+
+/*	forces I couldn't get to work
 	.velocityDecay(0.2)
 	.force('x', d3.forceX().strength(forceStrength).x(center.x))
   	.force('y', d3.forceY().strength(forceStrength).y(center.y))
   	.force('charge', d3.forceManyBody().strength(charge))
   	.on('tick', ticked);
+*/
 
 // Add nodes via the notes method
-var myNodes = [{name:'a'}, {name:'b'}, {name:'c'}];
-simulation.nodes(myNodes);
+/*var myNodes = [{name:'a'}, {name:'b'}, {name:'c'}];
+simulation.nodes(myNodes);*/
+
+//Building an array of objects from the served and unserved data
+var servedArray = [];
+var unservedArray = [];
+
+for (i = 0; i < served; i++) {
+	servedArray[i]={"hh": +1};
+}
+
+for (i = 0; i < unserved; i++) {
+	unservedArray[i]={"hh": +2};
+}
+
+
+var myNodes2 = servedArray.concat(unservedArray);
+
+console.log(myNodes2.toString());
+
+simulation.nodes(myNodes2);
+simulation.restart();
 
 //testing passing elig to an array
 //change this so it passes a value of "served" until value of served runs out (while) and then fills the rest of the array with "unserved"
@@ -237,30 +277,24 @@ simulation.nodes(myNodes);
 //Then figure out a cluster by the value "served" vs "unserved"
 //https://bl.ocks.org/ctufts/f38ef0187f98c537d791d24fda4a6ef9
 
-eligR = d3.range(elig);
-var test = {}
+/*eligR = d3.range(elig);
+var clusterPop = {}
+var myNodes2 = []
 
 for (i in eligR) {
-	test[i] = "served";
+	clusterPop[i] = "served";
+	myNodes2.append(i);
 }
-console.log(test);
+console.log(clusterPop);
+console.log(myNodes);
+console.log(myNodes2);
+*/
 
 
 // Example of adding the centering force to the simulation, which keeps nodes centered on a particular point
 /*simulation.force('center', d3.forceCenter(width / 2, height / 2));*/
 
 
-//Here is what the charge function looks like that is passed in as the force’s strength:
-function charge(d) {
-  return -forceStrength * Math.pow(d.radius, 2.0);
-}
-
-//The ticked function for this is super simple, as it just moves the SVG circles used to make the bubbles to their new positions:
-function ticked() {
-  bubbles
-    .attr('cx', function (d) { return d.x; })
-    .attr('cy', function (d) { return d.y; });
-}
 
 // Create SVG
 var svg2 = d3.select("#bubbles")
@@ -269,12 +303,13 @@ var svg2 = d3.select("#bubbles")
     .attr("height", height2);
 	
 var bubbles = svg2.selectAll("circle")
-	.data(myNodes)
+	.data(myNodes2)
 	.enter().append("circle")
-	.style("fill", "black")
+	.style("fill", "rgba(255,255,255,0")
 	.style("stroke", "black")
-	.style("stroke-width", "1px")
-	.attr("r", 10);
+	.style("stroke-width", ".5px")
+	.attr("r", 5);
+
 
 </script>
 <!-- EXTRA CODE
