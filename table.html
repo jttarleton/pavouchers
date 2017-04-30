@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style type="text/css">
+
+table {
+  border-collapse: collapse;
+  font: 10px sans-serif;
+  width: 720px;
+}
+
+th {
+  font-weight: normal;
+  text-align: right;
+  padding-right: 6px;
+  min-width: 43px;
+}
+
+thead td {
+  cursor: s-resize;
+}
+
+tbody tr:first-child td {
+  padding-top: 2px;
+}
+
+tbody td {
+  padding: 0;
+  border-left: solid 1px #000;
+}
+
+tbody rect {
+  fill: steelblue;
+}
+
+tbody tr:hover rect {
+  fill: brown;
+}
+
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <th>County</th> <!-- COUNTYNM = County Name -->
+      <!-- <td>Pop.</td> POP = Total County Population ACS13 5yr -->
+      <td class="col1">HH Served</td> <!-- HCV = Housing Choice Vouchers in County -->
+      <td class="col2">Elig+Burdened+Unserved HH</td> <!--ELIGBUNT = Eligible households that are housing cost burdened and not served by HCVs, PB Section 8, or Public Housing> -->
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script>
+
+// From https://bl.ocks.org/mbostock/3719724
+
+d3.csv("data/hcv_pa.csv", function(error, pa) {
+  if (error) throw error;
+
+  var cols = d3.keys(pa[0]).filter(function(key) {
+    return key != "COUNTYNM" && key != "POP";
+  });
+
+console.log(cols);
+
+  d3.selectAll("thead td").data(cols).on("click", function(k) {
+    tr.sort(function(k){
+    return d3.ascending();
+    })
+    /*tr.sort(function(a, b) { return (b[k] / b.POP) - (a[k] / a.POP);
+     }); changed b.Total to b.POP */
+        
+  });
+
+  var tr = d3.select("tbody").selectAll("tr")
+      .data(pa)
+    .enter().append("tr");
+
+  tr.append("th")
+      .text(function(d) { return d.COUNTYNM; });
+
+  tr.selectAll("#col1")
+      .data(function(d) { return cols.map(function(k) { return d[k]; }); })
+    .enter().append("td").append("svg")
+      .attr("width", 300)
+      .attr("height",function(d) { return (Math.sqrt(d))*2/3; })
+    .append("circle")
+      .style("fill", "white")
+      .style("stroke", "black")
+      .style("stroke-width", "2px")
+      .attr("cx", function (d) {return 300-Math.sqrt(d)/3})
+      .attr("cy", function (d) {return Math.sqrt(d)/3})
+      .attr("r", function(d) { return Math.sqrt(d)/3; })
+
+  tr.selectAll("#col2")
+      .data(function(d) { return cols.map(function(k) { return d[k]; }); })
+    .enter().append("td").append("svg")
+      .attr("width", 300)
+      .attr("height",function(d) { return ((Math.sqrt(d))*2/3); })
+    .append("circle")
+      .style("fill", "yellow")
+      .style("stroke", "black")
+      .style("stroke-width", "2px")
+      .attr("cx", function (d) {return Math.sqrt(d)/3})
+      .attr("cy", function (d) {return Math.sqrt(d)/3})
+      .attr("r", function(d) { return Math.sqrt(d)/3; })
+});
+
+
+</script>
