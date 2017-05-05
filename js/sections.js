@@ -107,28 +107,141 @@ var scrollVis = function () {
    */
   var setupVis = function (pa) {
 
-    var burden = g.selectAll('.burden').data(pa);
+   /* var burden = g.selectAll('.burden').data(pa);
     var burdenE = burden.enter()
-      .append("path")
+      .append("path")*/
 
 
-  g.append('g')
-    .attr("class", "PA_Counties_jc")
-    .selectAll("path")
-    .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
-    .enter().append("path")
-    .attr("d", path)
-    .style("stroke", "lightgrey")
-    .style("stroke-width","1px")
-    .style("fill", "white");
-    .style("fill", function(d) {
-      return color1(d.properties.BRD_T_P);
-    });
+    g.append('g')
+      .attr("class", "PA_Counties_jc")
+      .selectAll("path")
+      .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
+      .enter().append("path")
+      .attr("d", path)
+      .style("stroke", "lightgrey")
+      .style("stroke-width","1px")
+      .style("fill", "white");
+      
+
+
+
+
+
+      .style("fill", function(d) {
+        return color1(d.properties.BRD_T_P);
+      });
 
 
 
 
 }
+
+
+
+/**
+   * setupSections - each section is activated
+   * by a separate function. Here we associate
+   * these functions to the sections based on
+   * the section's index.
+   *
+   */
+  var setupSections = function () {
+    // activateFunctions are called each
+    // time the active section changes
+    activateFunctions[0] = showBlank;
+    activateFunctions[1] = showBurden;
+    activateFunctions[2] = showHCVCount;
+    /*activateFunctions[3] = showHCVHH;
+    activateFunctions[4] = showELIGBUNT;
+    activateFunctions[5] = showElection;
+    activateFunctions[6] = showRurban;*/
+
+  };
+
+
+/**
+   * ACTIVATE FUNCTIONS
+   *
+   * These will be called their
+   * section is scrolled to.
+   *
+   * General pattern is to ensure
+   * all content for the current section
+   * is transitioned in, while hiding
+   * the content for the previous section
+   * as well as the next section (as the
+   * user may be scrolling up or down).
+   *
+   */
+
+  /**
+   * showBlank - initial map
+   *
+   * hides: Burden Map
+   * (no previous step to hide)
+   * shows: Blank Map
+   *
+   */
+  function showBlank() {
+    g.selectAll('.count-title')
+      .transition()
+      .duration(0)
+      .attr('opacity', 0);
+
+    g.selectAll('.openvis-title')
+      .transition()
+      .duration(600)
+      .attr('opacity', 1.0);
+  }
+
+  /**
+   * showBurden - housing cost burden map
+   *
+   * hides: Blank map
+   * hides: HCV count map
+   * shows: housing cost burden map
+   *
+   */
+  function showBurden() {
+    g.selectAll('.openvis-title')
+      .transition()
+      .duration(0)
+      .attr('opacity', 0);
+
+    g.selectAll('.square')
+      .transition()
+      .duration(0)
+      .attr('opacity', 0);
+
+    g.selectAll('.count-title')
+      .transition()
+      .duration(600)
+      .attr('opacity', 1.0);
+  }
+
+  /**
+   * showHCVCount - hcv count choropleth
+   *
+   * hides: burden map
+   * hides: hcv per household map
+   * shows: hcv count choropleth
+   *
+   */
+  function showHCVCount() {
+    g.selectAll('.count-title')
+      .transition()
+      .duration(0)
+      .attr('opacity', 0);
+
+    g.selectAll('.square')
+      .transition()
+      .duration(600)
+      .delay(function (d) {
+        return 5 * d.row;
+      })
+      .attr('opacity', 1.0)
+      .attr('fill', '#ddd');
+  }
 
 
 /**
@@ -173,7 +286,7 @@ function display(data) {
   // create a new plot and
   // display it
   var plot = scrollVis();
-  d3.select('#vis')
+  d3.select('#map')
     .datum(data)
     .call(plot);
 
