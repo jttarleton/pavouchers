@@ -112,7 +112,7 @@ var scrollVis = function () {
       .append("path")*/
 
 
-    g.append('g')
+    svg.append('g')
       .attr("class", "blank")
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
@@ -122,8 +122,9 @@ var scrollVis = function () {
       .style("stroke-width","1px")
       .style("fill", "white")
       .attr('opacity', 0);
+      console.log("x")
       
-    g.append('g')
+    /*g.append('g')
       .attr("class", "burden")
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
@@ -148,7 +149,7 @@ var scrollVis = function () {
       .style("fill", function(d) {
       return color2(d.properties.HCV);
       })
-      .attr('opacity', 0);
+      .attr('opacity', 0);*/
 
       
 
