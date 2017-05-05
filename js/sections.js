@@ -113,23 +113,44 @@ var scrollVis = function () {
 
 
     g.append('g')
-      .attr("class", "PA_Counties_jc")
+      .attr("class", "blank")
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
       .enter().append("path")
       .attr("d", path)
       .style("stroke", "lightgrey")
       .style("stroke-width","1px")
-      .style("fill", "white");
+      .style("fill", "white")
+      .attr('opacity', 0);
       
-
-
-
-
-
+    g.append('g')
+      .attr("class", "burden")
+      .selectAll("path")
+      .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
+      .enter().append("path")
+      .attr("d", path)
+      .style("stroke", "lightgrey")
+      .style("stroke-width","1px")
       .style("fill", function(d) {
         return color1(d.properties.BRD_T_P);
-      });
+      })
+      .attr('opacity', 0);
+
+
+    g.append('g')
+      .attr("class", "HCVCount")
+      .selectAll("path")
+      .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
+      .enter().append("path")
+      .attr("d", path)
+      .style("stroke", "lightgrey")
+      .style("stroke-width","1px")
+      .style("fill", function(d) {
+      return color2(d.properties.HCV);
+      })
+      .attr('opacity', 0);
+
+      
 
 
 
@@ -183,12 +204,12 @@ var scrollVis = function () {
    *
    */
   function showBlank() {
-    g.selectAll('.count-title')
+    g.selectAll('.burden')
       .transition()
       .duration(0)
       .attr('opacity', 0);
 
-    g.selectAll('.openvis-title')
+    g.selectAll('.blank')
       .transition()
       .duration(600)
       .attr('opacity', 1.0);
@@ -203,17 +224,17 @@ var scrollVis = function () {
    *
    */
   function showBurden() {
-    g.selectAll('.openvis-title')
+    g.selectAll('.blank')
       .transition()
       .duration(0)
       .attr('opacity', 0);
 
-    g.selectAll('.square')
+    g.selectAll('.HCVCount')
       .transition()
       .duration(0)
       .attr('opacity', 0);
 
-    g.selectAll('.count-title')
+    g.selectAll('.burden')
       .transition()
       .duration(600)
       .attr('opacity', 1.0);
@@ -228,19 +249,15 @@ var scrollVis = function () {
    *
    */
   function showHCVCount() {
-    g.selectAll('.count-title')
+    g.selectAll('.burden')
       .transition()
       .duration(0)
       .attr('opacity', 0);
 
-    g.selectAll('.square')
+    g.selectAll('.HCVCount')
       .transition()
       .duration(600)
-      .delay(function (d) {
-        return 5 * d.row;
-      })
-      .attr('opacity', 1.0)
-      .attr('fill', '#ddd');
+      .attr('opacity', 1.0);
   }
 
 
@@ -259,16 +276,6 @@ var scrollVis = function () {
     lastIndex = activeIndex;
   };
 
-  /**
-   * update
-   *
-   * @param index
-   * @param progress
-   */
-  chart.update = function (index, progress) {
-    updateFunctions[index](progress);
-  };
-
   // return chart function
   return chart;
 };
@@ -282,12 +289,12 @@ var scrollVis = function () {
  *
  * @param data - loaded json data
  */
-function display(data) {
+function display(pa) {
   // create a new plot and
   // display it
   var plot = scrollVis();
-  d3.select('#map')
-    .datum(data)
+  d3.select('#vis')
+    .datum(pa)
     .call(plot);
 
   // setup scroll functionality
@@ -307,10 +314,9 @@ function display(data) {
     plot.activate(index);
   });
 
-  scroll.on('progress', function (index, progress) {
-    plot.update(index, progress);
-  });
 }
 
 // load data and display
 d3.json('data/hcv_pa_simp.json', display);
+
+
