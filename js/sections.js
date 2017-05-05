@@ -32,10 +32,27 @@ var scrollVis = function () {
         .projection( proj );
 
 
+    var color1 = d3.scaleThreshold()
+        .domain([0.25, .3, 0.35, 0.4, .45, .5, .55, .6])
+        .range(["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]);
+
+    var color2 = d3.scaleThreshold()
+        .domain([100, 500, 1000, 1500, 2000, 4000, 10000, 15000])
+        .range(["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]);
+
+    var color3 = d3.scaleThreshold()
+        .domain([.2, .5, 1, 1.5, 2, 2.5, 3, 3.5])
+        .range(["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]);
+
+    var color4 = d3.scaleThreshold()
+        .domain([-0.5, -0.25, -0.1, 0.0, 0.1, 0.25, .5])
+        .range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
+
+
     // When scrolling to a new section
     // the activation function for that
     // section is called.
-    var activateFunctions = [];
+   var activateFunctions = [];
     // If a section has an update function
     // then it is called while scrolling
     // through the section with the current
@@ -53,9 +70,10 @@ var scrollVis = function () {
    *  example, we will be drawing it in #vis
    */
   var chart = function (selection) {
-    selection.each(function (rawData) {
+    selection.each(function (pa) {
       // create svg and give it a width and height
-      svg = d3.select(this).selectAll('svg').data([wordData]);
+      svg = d3.select(this).selectAll('svg');
+      //deleted .data([wordData]);
       var svgE = svg.enter().append('svg');
       // @v4 use merge to combine enter and existing selection
       svg = svg.merge(svgE);
@@ -65,33 +83,36 @@ var scrollVis = function () {
 
       svg.append('g');
 
-// Create SVG
-var svg = d3.select("#map")
-	.append("svg")
-    .attr("width", width)
-    .attr("height", height);
+// look closely at this HCVdata, word data, fillewrods, etc. maybe delete
+
+// this group element will be used to contain all
+      // other elements.
+      g = svg.select('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+      setupVis(pa);
+
+      setupSections();
+    });
+  };
+
+/**
+   * setupVis - creates initial elements for all
+   * sections of the visualization.
+   *
+   * @param wordData - data object for each word.
+   * @param fillerCounts - nested data that includes
+   *  element for each filler word type.
+   * @param histData - binned histogram data
+   */
+  var setupVis = function (pa) {
+
+    var burden = g.selectAll('.burden').data(pa);
+    var burdenE = burden.enter()
+      .append("path")
 
 
-
-// Append empty placeholder g element to the SVG
-// g will contain geometry elements
-var g = svg.append( "g" );
-
-
-// set color
-
-
-var color = d3.scaleThreshold()
-    .domain([0.25, .3, 0.35, 0.4, .45, .5, .55, .6])
-    .range(["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]);
-    /*.domain([0, .5])
-    .range(["red","white","green"]);*/
-
-
-function ready(error, pa) {
-  if (error) throw error;
-  
-  svg.append("g")
+  g.append('g')
     .attr("class", "PA_Counties_jc")
     .selectAll("path")
     .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
@@ -100,9 +121,13 @@ function ready(error, pa) {
     .style("stroke", "lightgrey")
     .style("stroke-width","1px")
     .style("fill", "white");
-    /*.style("fill", function(d) {
-    	return color(d.properties.BRD_T_P);
-    });*/
+    .style("fill", function(d) {
+      return color1(d.properties.BRD_T_P);
+    });
+
+
+
+
 }
 
 
