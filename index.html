@@ -14,8 +14,10 @@
 
 <!-- JS Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="js/script.js"></script>
+  <script src="lib/d3.js"></script>
+  <script src="js/scroller.js"></script>
+  <script src="js/sections.js"></script>
 
 <!-- D3 Scripts -->
 	<script src="https://d3js.org/d3.v4.min.js"></script>
@@ -23,303 +25,46 @@
 	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/topojson.v2.min.js"></script>
-
-<!-- Data -->
-
 </head>
 
+
 <body>
-
-
-<div id="header">
-	<div id="countyname">&nbsp;</div>
-	<div id="map">
-	</div>
-	<div class="dropdown">
-	  	<button class="dropbtn">Dropdown</button>
-	  	<div class="dropdown-content">
-	    	<a href="#">Link 1</a>
-	    	<a href="#">Link 2</a>
-	    	<a href="#">Link 3</a>
-	  	</div>
-	</div>
-	</div>
-</div>
-
 <div class="container">
-
-	<div class="row">
-			<div class="col-md-4 col-md-offset-4" style="z-index: 20;">
-			<br />
-			<br />
-			<br />
-			<br />
-			<h1>Vouchers and Votes in the Keystone State</h1>
-			</div>
-			<div id="space"></div>
-			<div class="col-md-4 col-md-offset-4" style="z-index:0;">
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<p>By Zach Postone and Jonathan Tarleton</p>
-			</div>
-
-	</div>
-
-<!-- Making extra space -->
-	<div class="row">
-	<br />
-	</div>
-	<div class="row">
-	<br />
-	</div>
-	<div class="row">
-	<br />
-	</div>
-	<div class="row">
-	<br />
-	</div>
-	<div class="row">
-	<br />
-	</div>
-	<div class="row">
-	<br />
-	</div>
-	<div class="row">
-	<br />
-	</div>
-    <div class="row">
-	<br />
-	</div>
-    <div class="row">
-	<br />
-	</div>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-		<h2>The Burden of Housing</h2>
-		<p>In [2016], [373,000] low-income households in Pennsylvania pay more than half their income for rent. 
-		This is both an urban and a rural problem — just as rents have crept up in cities, the shale has driven up housing prices in rural areas across the state, all while incomes have stagnated.
-		Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. 
-		Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.</p>
-
-		<h2>The Vouchers</h2>
-		<p>Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. 
-		Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.
-		Vouchers are concentrated in urban areas in part because of higher populations and, generally, higher rents.
-		But in per capita terms, the picture is slightly more complicated. Take for example Potter County, a rural county with all of 17,497 and 295 vouchers for 1.6 vouchers per one hundred people.</p>
-
-		<h2>Extra Text</h2>
-		<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar quis neque quis dictum. Praesent et mollis purus, vitae tempor ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis orci velit, auctor sit amet volutpat eget, tempor eget nisi. Ut scelerisque dolor in ultrices congue. Nunc vulputate hendrerit libero, in iaculis libero aliquet convallis. Vestibulum facilisis diam eu mauris commodo, eget efficitur mauris fermentum. Donec vitae ligula turpis. Sed quis felis quis ligula aliquam pellentesque. Duis enim tortor, consectetur a metus sit amet, eleifend sodales turpis. Integer suscipit sapien felis, quis pulvinar metus imperdiet sed. Aenean dolor turpis, ultrices ut libero sit amet, venenatis dapibus magna. Etiam eros tortor, venenatis eu mi sed, suscipit commodo lorem. Nunc laoreet vestibulum dictum. Aenean vel orci libero.
-
-		Proin porta tincidunt convallis. Praesent fringilla est in nisi dapibus, et iaculis lectus blandit. Vestibulum gravida maximus ultricies. Duis id interdum sem, sed tincidunt orci. Proin mattis, urna a vulputate tristique, ligula nulla maximus nisl, et gravida tellus eros vel ipsum. Etiam consectetur justo eget ligula posuere, ac euismod turpis sodales. Duis dictum orci a pretium congue. Curabitur fringilla lacus quis lacinia dictum. Donec eros sapien, pulvinar aliquam ex nec, commodo suscipit massa. Sed dictum vel est sit amet lobortis. Nulla at magna semper, feugiat erat vitae, laoreet mauris. In convallis faucibus tortor in facilisis. Duis sit amet neque non quam ultricies rutrum aliquet ut dolor. Suspendisse quis est in mauris sodales porttitor dignissim ut ligula. Nulla lorem nisi, venenatis in arcu et, euismod lobortis est.
-
-		Suspendisse molestie vestibulum tempus. Praesent efficitur metus eget ligula efficitur luctus. Vestibulum pharetra odio condimentum, laoreet arcu et, aliquet libero. Aliquam id enim arcu. Maecenas at blandit magna. Nunc nec gravida odio. Morbi nec feugiat felis. Morbi maximus felis ipsum, quis maximus erat vehicula et.
-
-		Ut vel ex ipsum. Praesent sit amet ullamcorper tellus. Praesent in ipsum ultricies, vehicula ex nec, eleifend lorem. Ut tincidunt varius felis, eget semper nisl bibendum vitae. Aliquam id bibendum magna. Aenean sed lectus ornare, pulvinar libero ut, imperdiet ipsum. Curabitur interdum sed eros ut pharetra. Morbi imperdiet interdum sem, sed venenatis quam pretium at. Etiam porttitor ante eget sem mattis porttitor. Aenean ut erat at orci tempor dapibus sed quis sapien. Maecenas arcu ipsum, imperdiet sit amet tellus a, pharetra varius felis. Aenean a orci accumsan, molestie augue a, iaculis ex. Sed egestas auctor varius. Duis sapien felis, commodo vitae ligula quis, pretium tempus purus.
-
-		Quisque faucibus mollis eros, sit amet porttitor nulla commodo ac. Vivamus euismod elit porttitor commodo fringilla. Vivamus massa tellus, lobortis eget dictum nec, congue eget odio. Vestibulum risus leo, laoreet et ante ut, tempor molestie massa. Integer tincidunt tincidunt purus at placerat. Mauris orci neque, varius et semper sed, laoreet quis tortor. Cras ac libero nulla. Nullam felis ipsum, iaculis eget egestas eu, tempor quis ipsum. Quisque dignissim non ligula ut efficitur. Donec at purus commodo, bibendum ipsum eget, luctus erat. Cras rutrum pharetra leo sed viverra. Vestibulum ac aliquet leo. Nulla id urna orci. Nunc vel placerat lacus. Donec eget erat consequat, semper mauris non, feugiat nulla.
-		</p>
-		</div>
-	</div>
-</div>
-
-<div id="space"></div>
-<div id="space"></div>
-  <div id="bubbles">
+<div id='graphic'>
+  <div id='map'>
   </div>
 
-<!-- D3 Script for the header map -->
+<div class="row">
+      <div class="col-md-4 col-md-offset-4" style="z-index: 20;">
+      <br />
+      <br />
+      <br />
+      <br />
+      <h1>Vouchers and Votes in the Keystone State</h1>
+      </div>
+      <div id="space"></div>
+  </div>
 
-<script>
+  <div id='sections'>
 
-// Width and Height of the whole visualization
-var width = 600;
-var height = 300;
+    <section class="step">
+      <div class="title">The Burden of Housing</div>
+       In [2016], [373,000] low-income households in Pennsylvania pay more than half their income for rent. This is both an urban and a rural problem — just as rents have crept up in cities, the shale has driven up housing prices in rural areas across the state, all while incomes have stagnated. Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.</p>
+    </section>
 
-// Create SVG
-var svg = d3.select("#map")
-	.append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    <section class="step">
+      <div class="title">The Vouchers</div>
+      Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.Vouchers are concentrated in urban areas in part because of higher populations and, generally, higher rents.But in per capita terms, the picture is slightly more complicated. Take for example Potter County, a rural county with all of 17,497 and 295 vouchers for 1.6 vouchers per one hundred people.
+    </section>
 
-// Define projection;
-/* var albersProjection = d3.geoAlbers(); */
-var proj = d3.geoAlbers()
-    .rotate( [77.727836,0] )
-    .center( [0, 40.964551] )
-    .scale(6000)
-    .translate( [width/2,height/2] );
+    <section class="step">
+      <div class="title">Extra Text</div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar quis neque quis dictum. Praesent et mollis purus, vitae tempor ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis orci velit, auctor sit amet volutpat eget, tempor eget nisi. Ut scelerisque dolor in ultrices congue. Nunc vulputate hendrerit libero, in iaculis libero aliquet convallis. Vestibulum facilisis diam eu mauris commodo, eget efficitur mauris fermentum. Donec vitae ligula turpis. Sed quis felis quis ligula aliquam pellentesque. Duis enim tortor, consectetur a metus sit amet, eleifend sodales turpis. Integer suscipit sapien felis, quis pulvinar metus imperdiet sed. Aenean dolor turpis, ultrices ut libero sit amet, venenatis dapibus magna. Etiam eros tortor, venenatis eu mi sed, suscipit commodo lorem. Nunc laoreet vestibulum dictum. Aenean vel orci libero.
+    </section>
+  </div>
+</div>
+</div>
 
-// Create GeoPath function that uses built-in D3 functionality to turn
-// lat/lon coordinates into screen coordinates
-var path = d3.geoPath()
-	.projection( proj );
-
-// Append empty placeholder g element to the SVG
-// g will contain geometry elements
-var g = svg.append( "g" );
-
-
-// set color
-
-
-var color = d3.scaleThreshold()
-    .domain([0.25, .3, 0.35, 0.4, .45, .5, .55, .6])
-    .range(["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]);
-    /*.domain([0, .5])
-    .range(["red","white","green"]);*/
-
-d3.queue()
-    .defer(d3.json, "data/hcv_pa_simp.json")
-    .await(ready);
-
-var elig = 10;
-
-function ready(error, pa) {
-  if (error) throw error;
-  
-  svg.append("g")
-    .attr("class", "PA_Counties_jc")
-    .selectAll("path")
-    .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
-    .enter().append("path")
-    .attr("d", path)
-    .style("stroke", "lightgrey")
-    .style("stroke-width","1px")
-    .style("fill", "white")
-    /*.style("fill", function(d) {
-    	return color(d.properties.BRD_T_P);
-    });*/
-    .on("click", function(d){
-		d3.select("#countyname").text(d.properties.NAMELSAD);
-		elig = +d.properties.ELIG_B;
-		console.log(elig);
-		d3.selectAll("circle").remove();
-		drawBubbles()
-	});
-}
-
-/* Script for the D3 Bubbles*/
-
-var width2 = 600,
-    height2 = 400,
-    padding = 2, // separation between same-color nodes
-    clusterPadding = 6, // separation between different-color nodes
-    maxRadius = 2;
-
-
-//Color from original code
-/*var bubbleColor = d3.scaleSequential(d3.interpolateRainbow)
-    .domain(d3.range(m));*/
-
-// The largest node for each cluster.
-function drawBubbles () {
-	console.log("elig inside is " +elig);
-
-	var n = elig/100, // total number of nodes
-    	m = 1; // number of distinct clusters
-
-	var clusters = new Array(m);
-
-	var nodes = d3.range(n).map(function() {
-	  var i = Math.floor(Math.random() * m),
-	      r = parseInt(Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius),
-	      d = {
-	        cluster: i,
-	        radius: Math.floor((Math.random() * 3) + 3),
-	        x: Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random(),
-	        y: Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random()
-	      };
-	  if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
-	  return d;
-	});
-
-	var force = d3.forceSimulation()
-	  // keep entire simulation balanced around screen center
-	  .force('center', d3.forceCenter(width/2, height/2))
-
-	  // cluster by section
-	  .force('cluster', cluster()
-	    .strength(0.2))
-
-	  // apply collision with padding
-	  .force('collide', d3.forceCollide(d => d.radius + padding)
-	    .strength(0.7))
-
-	  .on('tick', layoutTick)
-		.nodes(nodes);
-	  
-	var svg2 = d3.select("#bubbles").append("svg")
-	    .attr("width", width2)
-	    .attr("height", height2)
-	    /*.attr("style", "outline: thin solid red;");*/
-
-	var node = svg2.selectAll("circle")
-	    .data(nodes)
-	  .enter().append("circle")
-	  	.style("fill", "white")
-	  	.style("stroke", "black")
-	  	.style("stroke-width", "1px")
-	    /* .style("fill", function(d) { return bubbleColor(d.cluster/10); }); */
-
-
-	  
-	function layoutTick(e) {
-	  node
-	      .attr("cx", function(d) { return d.x; })
-	      .attr("cy", function(d) { return d.y; })
-	      .attr("r", function(d) { return d.radius; });
-	}
-
-	// Move d to be adjacent to the cluster node.
-	// from: https://bl.ocks.org/mbostock/7881887
-	function cluster () {
-
-	  var nodes,
-	    strength = 0.1;
-
-	  function force (alpha) {
-
-	    // scale + curve alpha value
-	    alpha *= strength * alpha;
-
-	    nodes.forEach(function(d) {
-				var cluster = clusters[d.cluster];
-	    	if (cluster === d) return;
-	      
-	      let x = d.x - cluster.x,
-	        y = d.y - cluster.y,
-	        l = Math.sqrt(x * x + y * y),
-	        r = d.radius + cluster.radius;
-
-	      if (l != r) {
-	        l = (l - r) / l * alpha;
-	        d.x -= x *= l;
-	        d.y -= y *= l;
-	        cluster.x += x;
-	        cluster.y += y;
-	      }
-	    });
-
-	  }
-
-	  force.initialize = function (_) {
-	    nodes = _;
-	  }
-
-	  force.strength = _ => {
-	    strength = _ == null ? strength : _;
-	    return force;
-	  };
-
-	  return force;
-
-	}
-}
-</script>
 
 
 <!-- EXTRA CODE
