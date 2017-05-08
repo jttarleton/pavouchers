@@ -72,7 +72,7 @@ var scrollVis = function () {
   var chart = function (selection) {
     selection.each(function (pa) {
       // create svg and give it a width and height
-      svg = d3.select(this).selectAll('svg');
+      svg = d3.select(this).selectAll('svg').data([pa]);
       //deleted .data([wordData]);
       var svgE = svg.enter().append('svg');
       // @v4 use merge to combine enter and existing selection
@@ -113,23 +113,23 @@ var scrollVis = function () {
 
 
     svg.append('g')
-      .attr("class", "blank")
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
       .enter().append("path")
       .attr("d", path)
+      .attr("class", "blank")
       .style("stroke", "lightgrey")
       .style("stroke-width","1px")
       .style("fill", "white")
       .attr('opacity', 0);
-      console.log("x")
+      //console.log(.properties.BRD_T_P);
       
-    /*g.append('g')
-      .attr("class", "burden")
+    svg.append('g')
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
       .enter().append("path")
       .attr("d", path)
+      .attr("class", "burden")
       .style("stroke", "lightgrey")
       .style("stroke-width","1px")
       .style("fill", function(d) {
@@ -138,22 +138,18 @@ var scrollVis = function () {
       .attr('opacity', 0);
 
 
-    g.append('g')
-      .attr("class", "HCVCount")
+    svg.append('g')
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
       .enter().append("path")
       .attr("d", path)
+      .attr("class", "HCVCount")
       .style("stroke", "lightgrey")
       .style("stroke-width","1px")
       .style("fill", function(d) {
       return color2(d.properties.HCV);
       })
-      .attr('opacity', 0);*/
-
-      
-
-
+      .attr('opacity', 0);
 
 
 }
@@ -205,15 +201,22 @@ var scrollVis = function () {
    *
    */
   function showBlank() {
-    g.selectAll('.burden')
+    d3.selectAll('.burden')
       .transition()
       .duration(0)
       .attr('opacity', 0);
+      console.log("show up");
 
-    g.selectAll('.blank')
+    d3.selectAll('.blank')
       .transition()
       .duration(600)
       .attr('opacity', 1.0);
+      console.log("really show up");
+
+    d3.selectAll('.HCVCount')
+      .transition()
+      .duration(0)
+      .attr('opacity', 0);
   }
 
   /**
@@ -225,17 +228,18 @@ var scrollVis = function () {
    *
    */
   function showBurden() {
-    g.selectAll('.blank')
+    d3.selectAll('.blank')
+      .transition()
+      .duration(0)
+      .attr('opacity', 0);
+      console.log("2ndmap");
+
+    d3.selectAll('.HCVCount')
       .transition()
       .duration(0)
       .attr('opacity', 0);
 
-    g.selectAll('.HCVCount')
-      .transition()
-      .duration(0)
-      .attr('opacity', 0);
-
-    g.selectAll('.burden')
+    d3.selectAll('.burden')
       .transition()
       .duration(600)
       .attr('opacity', 1.0);
@@ -250,12 +254,12 @@ var scrollVis = function () {
    *
    */
   function showHCVCount() {
-    g.selectAll('.burden')
+    d3.selectAll('.burden')
       .transition()
       .duration(0)
       .attr('opacity', 0);
 
-    g.selectAll('.HCVCount')
+    d3.selectAll('.HCVCount')
       .transition()
       .duration(600)
       .attr('opacity', 1.0);
@@ -313,6 +317,7 @@ function display(pa) {
 
     // activate current section
     plot.activate(index);
+    console.log("am i working");
   });
 
 }
