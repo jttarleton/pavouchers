@@ -48,6 +48,7 @@ var scrollVis = function () {
         .domain([-0.5, -0.25, -0.1, 0.0, 0.1, 0.25, .5])
         .range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
 
+    var elig = 10;
 
     // When scrolling to a new section
     // the activation function for that
@@ -121,7 +122,15 @@ var scrollVis = function () {
       .style("stroke", "lightgrey")
       .style("stroke-width","1px")
       .style("fill", "white")
-      .attr('opacity', 0);
+      .attr('opacity', 0)
+      .on("click", function(d){
+        d3.select("#countyname").text(d.properties.NAMELSAD);
+        console.log(d.properties.NAMELSAD);
+        elig = +d.properties.ELIG_B;
+        console.log(elig);
+        d3.selectAll("circle").remove();
+        drawBubbles()
+      });
       //console.log(.properties.BRD_T_P);
       
     svg.append('g')

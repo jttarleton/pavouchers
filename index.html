@@ -16,6 +16,9 @@
   <script src="lib/d3.js"></script>
   <script src="js/scroller.js"></script>
   <script src="js/sections.js"></script>
+  <script src="js/bubbles.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <!-- D3 Scripts -->
 	<script src="https://d3js.org/d3.v4.min.js"></script>
@@ -29,6 +32,7 @@
 <body>
 <div class="container">
 <div id='graphic'>
+  <div id="countyname">&nbsp;</div>
   <div id='vis'>
   </div>
 
@@ -41,32 +45,48 @@
       <h1>Vouchers and Votes in the Keystone State</h1>
       </div>
       <div id="space"></div>
+      <div class="col-md-4 col-md-offset-4" style="z-index:0;">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>By Zach Postone and Jonathan Tarleton</p>
+      </div>
+
   </div>
 
   <div id='sections'>
 
+
     <section class="step">
+      <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      <h2>The Burden of Housing</h2>
+       In [2016], [373,000] low-income households in Pennsylvania pay more than half their income for rent. This is both an urban and a rural problem — just as rents have crept up in cities, the shale has driven up housing prices in rural areas across the state, all while incomes have stagnated. Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.</div></div>
     </section>
 
     <section class="step">
-      <div class="title">The Burden of Housing</div>
-       In [2016], [373,000] low-income households in Pennsylvania pay more than half their income for rent. This is both an urban and a rural problem — just as rents have crept up in cities, the shale has driven up housing prices in rural areas across the state, all while incomes have stagnated. Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.</p>
+      <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      <h2>The Vouchers</h2>
+      Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.Vouchers are concentrated in urban areas in part because of higher populations and, generally, higher rents.But in per capita terms, the picture is slightly more complicated. Take for example Potter County, a rural county with all of 17,497 and 295 vouchers for 1.6 vouchers per one hundred people.</div></div>
     </section>
 
     <section class="step">
-      <div class="title">The Vouchers</div>
-      Housing Choice Vouchers, often called Section 8 vouchers, help relieve that rent burden allowing eligible households to pay 30% of their income to rent a reasonably priced apartment. Housing authorities across the state administer this federal program. Click any county to see how many vouchers are in use.Vouchers are concentrated in urban areas in part because of higher populations and, generally, higher rents.But in per capita terms, the picture is slightly more complicated. Take for example Potter County, a rural county with all of 17,497 and 295 vouchers for 1.6 vouchers per one hundred people.
-    </section>
-
-    <section class="step">
-      <div class="title">Extra Text</div>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar quis neque quis dictum. Praesent et mollis purus, vitae tempor ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis orci velit, auctor sit amet volutpat eget, tempor eget nisi. Ut scelerisque dolor in ultrices congue. Nunc vulputate hendrerit libero, in iaculis libero aliquet convallis. Vestibulum facilisis diam eu mauris commodo, eget efficitur mauris fermentum. Donec vitae ligula turpis. Sed quis felis quis ligula aliquam pellentesque. Duis enim tortor, consectetur a metus sit amet, eleifend sodales turpis. Integer suscipit sapien felis, quis pulvinar metus imperdiet sed. Aenean dolor turpis, ultrices ut libero sit amet, venenatis dapibus magna. Etiam eros tortor, venenatis eu mi sed, suscipit commodo lorem. Nunc laoreet vestibulum dictum. Aenean vel orci libero.
+      <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      <h2>Extra Text</h2>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar quis neque quis dictum. Praesent et mollis purus, vitae tempor ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis orci velit, auctor sit amet volutpat eget, tempor eget nisi. Ut scelerisque dolor in ultrices congue. Nunc vulputate hendrerit libero, in iaculis libero aliquet convallis. Vestibulum facilisis diam eu mauris commodo, eget efficitur mauris fermentum. Donec vitae ligula turpis. Sed quis felis quis ligula aliquam pellentesque. Duis enim tortor, consectetur a metus sit amet, eleifend sodales turpis. Integer suscipit sapien felis, quis pulvinar metus imperdiet sed. Aenean dolor turpis, ultrices ut libero sit amet, venenatis dapibus magna. Etiam eros tortor, venenatis eu mi sed, suscipit commodo lorem. Nunc laoreet vestibulum dictum. Aenean vel orci libero.</div></div>
     </section>
   </div>
 </div>
 </div>
 
-
+<div id="space"></div>
+<div id="space"></div>
+  <div id="bubbles">
+  </div>
 
 <!-- EXTRA CODE
 
