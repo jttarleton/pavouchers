@@ -124,11 +124,11 @@ var scrollVis = function () {
       .style("fill", "white")
       .attr('opacity', 0)
       .on("click", function(d){
-        d3.select("#countyname").text(d.properties.NAMELSAD);
-        elig = +d.properties.ELIG_B;
-        console.log(elig);
-        d3.selectAll("circle").remove();
-        drawBubbles()
+        //d3.select("#countyname").text(d.properties.NAMELSAD);
+        //elig = +d.properties.ELIG_B;
+        console.log("hiiiiiiiiii");
+        //d3.selectAll("circle").remove();
+        //drawBubbles()
       });
       
     svg.append('g')
@@ -210,19 +210,19 @@ var scrollVis = function () {
   function showBlank() {
     d3.selectAll('.burden')
       .transition()
-      .duration(0)
+      .duration(600)
       .attr('opacity', 0);
       console.log("show up");
 
     d3.selectAll('.blank')
       .transition()
-      .duration(600)
+      .duration(0)
       .attr('opacity', 1.0);
       console.log("really show up");
 
     d3.selectAll('.HCVCount')
       .transition()
-      .duration(0)
+      .duration(600)
       .attr('opacity', 0);
   }
 
@@ -237,18 +237,18 @@ var scrollVis = function () {
   function showBurden() {
     d3.selectAll('.blank')
       .transition()
-      .duration(0)
+      .duration(1000)
       .attr('opacity', 0);
       console.log("2ndmap");
 
     d3.selectAll('.HCVCount')
       .transition()
-      .duration(0)
+      .duration(1000)
       .attr('opacity', 0);
 
     d3.selectAll('.burden')
       .transition()
-      .duration(600)
+      .duration(1000)
       .attr('opacity', 1.0);
   }
 
@@ -263,12 +263,12 @@ var scrollVis = function () {
   function showHCVCount() {
     d3.selectAll('.burden')
       .transition()
-      .duration(0)
+      .duration(1000)
       .attr('opacity', 0);
 
     d3.selectAll('.HCVCount')
       .transition()
-      .duration(600)
+      .duration(1000)
       .attr('opacity', 1.0);
   }
 
