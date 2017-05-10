@@ -125,13 +125,11 @@ var scrollVis = function () {
       .attr('opacity', 0)
       .on("click", function(d){
         d3.select("#countyname").text(d.properties.NAMELSAD);
-        console.log(d.properties.NAMELSAD);
         elig = +d.properties.ELIG_B;
         console.log(elig);
         d3.selectAll("circle").remove();
         drawBubbles()
       });
-      //console.log(.properties.BRD_T_P);
       
     svg.append('g')
       .selectAll("path")

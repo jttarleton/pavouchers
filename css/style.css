@@ -26,11 +26,11 @@ a:active {
 
 /* ----- Header and Map Area -----*/
 
-
 #vis{
     position: fixed;
     text-align:center;
-    margin: 0 ;
+    margin: 0;
+    margin-left: -15%;
     width:100%;
     z-index: 10;
 }
@@ -64,6 +64,10 @@ a:active {
   pointer-events: none;
 }
 
+/*#header {
+  z-index: 100 !important;
+}*/
+
 #sections {
   position: relative;
   display: inline-block;
@@ -72,7 +76,9 @@ a:active {
   z-index: 0;
 }
 
-.step {
+
+
+/*.step {
   margin-bottom: 100px;
 }
 
