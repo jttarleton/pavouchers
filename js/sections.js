@@ -1,4 +1,162 @@
 
+// Bubbles Code
+
+var clusters = null; //create empty clusters variable
+
+var served = null,
+    unserved = null;
+    bubbleFactor = .01
+
+var node = null;
+
+var width = 960,
+    height = 500,
+    padding = 1.5, // separation between same-color nodes
+    clusterPadding = 6, // separation between different-color nodes
+    maxRadius = 6,
+    minRadius = 4;
+
+var n = served + unserved, // total number of nodes
+    m = 2; // number of distinct clusters
+
+/*var color = d3.scaleSequential(d3.interpolateRainbow)
+    .domain(d3.range(m));*/
+
+var color = function (d) {
+  console.log(d);
+  if (d == 0) {
+    return "white";
+    }
+  else {
+    return "grey";
+  }
+};
+
+var clusters = new Array(m);
+
+// Move d to be adjacent to the cluster node.
+// from: https://bl.ocks.org/mbostock/7881887
+
+function cluster () {
+
+    var nodes,
+      strength = 0.1;
+
+    function force (alpha) {
+
+      // scale + curve alpha value
+      alpha *= strength * alpha;
+
+      nodes.forEach(function(d) {
+        var cluster = clusters[d.cluster];
+        if (cluster === d) return;
+        
+        let x = d.x - cluster.x,
+          y = d.y - cluster.y,
+          l = Math.sqrt(x * x + y * y),
+          r = d.radius + cluster.radius;
+
+        if (l != r) {
+          l = (l - r) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          cluster.x += x;
+          cluster.y += y;
+        }
+      });
+
+    }
+
+    force.initialize = function (_) {
+      nodes = _;
+    }
+
+    force.strength = _ => {
+      strength = _ == null ? strength : _;
+      return force;
+    };
+
+    return force;
+
+}
+
+function drawBubbles () {
+  console.log("DRAWING BUBBLES");
+  console.log("served: "+served);
+  console.log("unserved: "+unserved);
+  console.log("total nodes n: "+n);
+
+
+
+  function clustersort (d) {
+    console.log("clustersort is running");
+    if (d < (unserved*bubbleFactor)) {
+      return 0;
+    }
+    else {
+      return 1;
+    }
+  };
+
+  var nodes = d3.range(n).map(function(num) {
+    var i = clustersort(num),
+        r = Math.floor(Math.random() * (maxRadius - minRadius))+ minRadius,
+        d = {
+          cluster: i,
+          radius: r,
+          x: Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random(),
+          y: Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random()
+        };
+      if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
+        return d;
+  });
+
+
+  var force = d3.forceSimulation()
+  
+  // keep entire simulation balanced around screen center
+    .force('center', d3.forceCenter(width/2, height/2))
+
+  // cluster by section
+    .force('cluster', cluster()
+      .strength(0.2))
+
+  // apply collision with padding
+    .force('collide', d3.forceCollide(d => d.radius + padding)
+      .strength(1))
+
+    .on('tick', layoutTick)
+    .nodes(nodes);
+
+
+  var svg2 = d3.select("#bubbles").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  var node = svg2.selectAll("circle")
+    .data(nodes)
+  .enter().append("circle")
+    .style("stroke", "lightgrey")
+    .style("fill", function(d) { return color(d.cluster/10); });
+
+
+  function layoutTick(e) {
+  node
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; })
+    .attr("r", function(d) { return d.radius; });
+  }
+      
+clusters.append("text")
+  .text("TEXT");
+
+} //End of drawBubbles function
+
+
+
+
+// REST OF THE SECTIONS CODE
+
 
 var scrollVis = function () {
     // Width and Height of the whole visualization
@@ -60,9 +218,6 @@ var scrollVis = function () {
     // progress through the section.
     var updateFunctions = [];
 
-
-
-
 /**
    * chart
    *
@@ -106,6 +261,7 @@ var scrollVis = function () {
    *  element for each filler word type.
    * @param histData - binned histogram data
    */
+
   var setupVis = function (pa) {
 
    /* var burden = g.selectAll('.burden').data(pa);
@@ -149,10 +305,18 @@ var scrollVis = function () {
       .style("stroke-width","1px")
       .style("fill", function(d) {
       return color2(d.properties.HCV);
+      })
+      .on("click", function(d){
+        d3.select("#countyname").text(d.properties.NAMELSAD);
+        served = +d.properties.HCV;
+        unserved = +d.properties.ELIG_B;
+        n = (served + unserved)*bubbleFactor;
+        console.log("hiiiiiiiiii");
+        d3.selectAll("#bubbles svg").remove();
+        drawBubbles();
       });
-}
 
-
+};
 
 /**
    * setupSections - each section is activated

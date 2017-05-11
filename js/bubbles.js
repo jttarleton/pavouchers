@@ -20,19 +20,14 @@ var elig = 10;
 
 // The largest node for each cluster.
 
-svg.selectAll()
-      .on("click", function(d){
-        d3.select("#countyname").text(d.properties.NAMELSAD);
-        elig = +d.properties.ELIG_B;
-        console.log("hiiiiiiiiii");
-        d3.selectAll("circle").remove();
-        drawBubbles()
-      });
-
-
 
 
 function drawBubbles () {
+  console.log("DRAWING BUBBLES!");
+};
+
+
+/*function drawBubbles () {
 	console.log("elig inside is " +elig);
 
 	var n = elig/100, // total number of nodes
@@ -135,3 +130,4 @@ function drawBubbles () {
 
 	}
 }
+*/
