@@ -41,6 +41,12 @@ a:active {
   text-align: center;
 }
 
+#subtitle {
+  text-align: center;
+}
+
+
+
 #countyname {
   position:fixed;
   font-size: 20px;

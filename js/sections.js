@@ -149,17 +149,7 @@ var scrollVis = function () {
       .style("stroke-width","1px")
       .style("fill", function(d) {
       return color2(d.properties.HCV);
-      })
-      .attr('opacity', 0)
-      .on("click", function(d){
-        d3.select("#countyname").text(d.properties.NAMELSAD);
-        elig = +d.properties.ELIG_B;
-        console.log("hiiiiiiiiii");
-        d3.selectAll("circle").remove();
-        drawBubbles()
       });
-
-
 }
 
 
@@ -211,7 +201,7 @@ var scrollVis = function () {
   function showBlank() {
     d3.selectAll('.burden')
       .transition()
-      .duration(600)
+      .duration(0)
       .attr('opacity', 0);
       console.log("show up");
 
@@ -223,7 +213,7 @@ var scrollVis = function () {
 
     d3.selectAll('.HCVCount')
       .transition()
-      .duration(600)
+      .duration(0)
       .attr('opacity', 0);
   }
 
@@ -238,18 +228,18 @@ var scrollVis = function () {
   function showBurden() {
     d3.selectAll('.blank')
       .transition()
-      .duration(1000)
+      .duration(2000)
       .attr('opacity', 0);
       console.log("2ndmap");
 
     d3.selectAll('.HCVCount')
       .transition()
-      .duration(1000)
+      .duration(750)
       .attr('opacity', 0);
 
     d3.selectAll('.burden')
       .transition()
-      .duration(1000)
+      .duration(750)
       .attr('opacity', 1.0);
   }
 
@@ -264,12 +254,12 @@ var scrollVis = function () {
   function showHCVCount() {
     d3.selectAll('.burden')
       .transition()
-      .duration(1000)
+      .duration(750)
       .attr('opacity', 0);
 
     d3.selectAll('.HCVCount')
       .transition()
-      .duration(1000)
+      .duration(750)
       .attr('opacity', 1.0);
   }
 
@@ -321,7 +311,7 @@ function display(pa) {
   scroll.on('active', function (index) {
     // highlight current step text
     d3.selectAll('.step')
-      .style('opacity', function (d, i) { return i === index ? 1 : 0.1; });
+      .style('opacity', function (d, i) { return i+1 === index ? 1 : 0.1; });
 
     // activate current section
     plot.activate(index);

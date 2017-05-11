@@ -19,6 +19,19 @@ var elig = 10;
     .domain(d3.range(m));*/
 
 // The largest node for each cluster.
+
+svg.selectAll()
+      .on("click", function(d){
+        d3.select("#countyname").text(d.properties.NAMELSAD);
+        elig = +d.properties.ELIG_B;
+        console.log("hiiiiiiiiii");
+        d3.selectAll("circle").remove();
+        drawBubbles()
+      });
+
+
+
+
 function drawBubbles () {
 	console.log("elig inside is " +elig);
 
