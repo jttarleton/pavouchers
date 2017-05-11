@@ -7,6 +7,13 @@ var width2 = 600,
     maxRadius = 2;
 
 
+var width = 600;
+    var height = 300;
+    var margin = { top: 0, left: 20, bottom: 40, right: 10 };
+
+var elig = 10;
+
+
 //Color from original code
 /*var bubbleColor = d3.scaleSequential(d3.interpolateRainbow)
     .domain(d3.range(m));*/
