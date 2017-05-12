@@ -4,6 +4,7 @@ body {
   font-family: 'Karla', sans-serif;
   font-weight:400;
   letter-spacing: -0.015em;
+  font-size: 1.75em;
 }
 
 h1,h2,h3, h4, h5 {
@@ -26,17 +27,29 @@ a:active {
 
 /* ----- Header and Map Area -----*/
 
-#vis {
+#header {
     position: fixed;
+    text-align:center;
+    margin: 0;
+    width:100%;
+    z-index: 2;
+    padding-left: 0px;
+}
+
+#vis {
+    /*position: fixed;
     text-align:center;
     margin: 0;
     margin-left: -15%;
     width:100%;
-    z-index: 1;
+    z-index: 1;*/
+    width:600px;
+    margin: 0 auto;
+    padding-top: 0px;
 }
 
 #title {
-  z-index: 2;
+  z-index: 3;
   position:relative;
   text-align: center;
 }
@@ -48,11 +61,11 @@ a:active {
 
 
 #countyname {
-  position:fixed;
+  position:relative;
   font-size: 20px;
   height: 20px;
   padding-top: 9px;
-  margin-left:400px;
+  /*margin-left:400px;*/
   text-align:center;
 }
 

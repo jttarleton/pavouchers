@@ -14,7 +14,7 @@ var width = 960,
     padding = 1.5, // separation between same-color nodes
     clusterPadding = 6, // separation between different-color nodes
     maxRadius = 6,
-    minRadius = 4;
+    minRadius = 4.75;
 
 var n = served + unserved, // total number of nodes
     m = 2; // number of distinct clusters
@@ -25,10 +25,10 @@ var n = served + unserved, // total number of nodes
 var color = function (d) {
   console.log(d);
   if (d == 0) {
-    return "white";
+    return "lightgrey";
     }
   else {
-    return "grey";
+    return "black";
   }
 };
 
@@ -100,7 +100,7 @@ function drawBubbles () {
 
   var nodes = d3.range(n).map(function(num) {
     var i = clustersort(num),
-        r = Math.floor(Math.random() * (maxRadius - minRadius))+ minRadius,
+        r = Math.random() * (maxRadius - minRadius) + minRadius,
         d = {
           cluster: i,
           radius: r,
@@ -136,7 +136,7 @@ function drawBubbles () {
   var node = svg2.selectAll("circle")
     .data(nodes)
   .enter().append("circle")
-    .style("stroke", "lightgrey")
+    .style("stroke", "white")
     .style("fill", function(d) { return color(d.cluster/10); });
 
 
@@ -287,7 +287,7 @@ var scrollVis = function () {
       .enter().append("path")
       .attr("d", path)
       .attr("class", "burden")
-      .style("stroke", "lightgrey")
+      .style("stroke", "white")
       .style("stroke-width","1px")
       .style("fill", function(d) {
         return color1(d.properties.BRD_T_P);
@@ -301,7 +301,7 @@ var scrollVis = function () {
       .enter().append("path")
       .attr("d", path)
       .attr("class", "HCVCount")
-      .style("stroke", "lightgrey")
+      .style("stroke", "white")
       .style("stroke-width","1px")
       .style("fill", function(d) {
       return color2(d.properties.HCV);
