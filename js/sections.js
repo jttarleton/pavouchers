@@ -9,10 +9,10 @@ var served = null,
 
 var node = null;
 
-var width = 960,
-    height = 500,
-    padding = 1.5, // separation between same-color nodes
-    clusterPadding = 6, // separation between different-color nodes
+var width2 = 960,
+    height2 = 500,
+    padding = .25, // separation between same-color nodes
+    clusterPadding = 1, // separation between different-color nodes
     maxRadius = 6,
     minRadius = 4.75;
 
@@ -104,8 +104,8 @@ function drawBubbles () {
         d = {
           cluster: i,
           radius: r,
-          x: Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random(),
-          y: Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random()
+          x: Math.cos(i / m * 2 * Math.PI) * 200 + width2 / 2 + Math.random(),
+          y: Math.sin(i / m * 2 * Math.PI) * 200 + height2 / 2 + Math.random()
         };
       if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
         return d;
@@ -115,11 +115,11 @@ function drawBubbles () {
   var force = d3.forceSimulation()
   
   // keep entire simulation balanced around screen center
-    .force('center', d3.forceCenter(width/2, height/2))
+    .force('center', d3.forceCenter(width2/2, height2/2))
 
   // cluster by section
     .force('cluster', cluster()
-      .strength(0.2))
+      .strength(0.75))
 
   // apply collision with padding
     .force('collide', d3.forceCollide(d => d.radius + padding)
@@ -130,12 +130,12 @@ function drawBubbles () {
 
 
   var svg2 = d3.select("#bubbles").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", width2)
+    .attr("height", height2);
 
   var node = svg2.selectAll("circle")
     .data(nodes)
-  .enter().append("circle")
+    .enter().append("circle")
     .style("stroke", "white")
     .style("fill", function(d) { return color(d.cluster/10); });
 
