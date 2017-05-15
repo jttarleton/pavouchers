@@ -11,10 +11,10 @@ var node = null;
 
 var width2 = 960,
     height2 = 500,
-    padding = .25, // separation between same-color nodes
+    padding = .75, // separation between same-color nodes
     clusterPadding = 1, // separation between different-color nodes
-    maxRadius = 6,
-    minRadius = 4.75;
+    maxRadius = 8,
+    minRadius = 6.75;
 
 var n = served + unserved, // total number of nodes
     m = 2; // number of distinct clusters
@@ -136,9 +136,21 @@ function drawBubbles () {
   var node = svg2.selectAll("circle")
     .data(nodes)
     .enter().append("circle")
-    .style("stroke", "white")
+    .style("stroke", "#e6e6e6")
     .style("fill", function(d) { return color(d.cluster/10); });
 
+
+  svg2.append("text")
+    .text("served: "+served+" households")
+    .attr("color", "black")
+    .attr("dx", 50)
+    .attr("dy", 50);
+
+  svg2.append("text")
+    .text("unserved: "+unserved+" households")
+    .attr("color", "black")
+    .attr("dx", 700)
+    .attr("dy", 50);
 
   function layoutTick(e) {
   node
@@ -146,11 +158,12 @@ function drawBubbles () {
     .attr("cy", function(d) { return d.y; })
     .attr("r", function(d) { return d.radius; });
   }
-      
-clusters.append("text")
-  .text("TEXT");
+
+
 
 } //End of drawBubbles function
+
+
 
 
 

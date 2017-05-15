@@ -132,6 +132,7 @@ circle {
   text-align: center;
   height: auto;
   min-height: 300px;
+  z-index: 5;
 
 }
 
