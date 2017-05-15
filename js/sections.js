@@ -205,7 +205,11 @@ var scrollVis = function () {
 
     var color1 = d3.scaleThreshold()
         .domain([0.25, .3, 0.35, 0.4, .45, .5, .55, .6])
-        .range(["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]);
+        //.range(["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]);
+        .range(d3.range(9).map(function(i) {
+          return "q" + i + "-9";
+        }));
+
 
     var color2 = d3.scaleThreshold()
         .domain([100, 500, 1000, 1500, 2000, 4000, 10000, 15000])
@@ -218,8 +222,12 @@ var scrollVis = function () {
     var color4 = d3.scaleThreshold()
         .domain([-0.5, -0.25, -0.1, 0.0, 0.1, 0.25, .5])
         .range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
-
     
+    var legend = d3.legendColor()
+        .labelFormat(d3.format(".2f"))
+        .labels(d3.legendHelpers.thresholdLabels)
+        .useClass(true)
+        .scale(color1);
 
     // When scrolling to a new section
     // the activation function for that
@@ -292,19 +300,24 @@ var scrollVis = function () {
       .style("stroke-width","1px")
       .style("fill", "white")
       .attr('opacity', 0);
-      
+    
+    svg.append("g")
+      .attr("class", "legendThreshold burden")
+      //.attr("class", "burden")
+      .attr("transform", "translate(20,20)")
+      .attr('opacity', 0);
       
     svg.append('g')
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
       .enter().append("path")
       .attr("d", path)
-      .attr("class", "burden")
+      .attr("class", function(d) {
+        console.log(color1(d.properties.BRD_T_P));
+        return "burden " + color1(d.properties.BRD_T_P);
+      })
       .style("stroke", "white")
       .style("stroke-width","1px")
-      .style("fill", function(d) {
-        return color1(d.properties.BRD_T_P);
-      })
       .attr('opacity', 0);
 
 
@@ -418,6 +431,12 @@ var scrollVis = function () {
       .transition()
       .duration(750)
       .attr('opacity', 1.0);
+
+    d3.selectAll(".legendThreshold")
+      .call(legend)
+      .attr('opacity', 1.0);
+      console.log("legends of the fall");
+
   }
 
   /**
