@@ -14,7 +14,7 @@ var width2 = 960,
     padding = .75, // separation between same-color nodes
     clusterPadding = 1, // separation between different-color nodes
     maxRadius = 8,
-    minRadius = 6.75;
+    minRadius = 4.75;
 
 var n = served + unserved, // total number of nodes
     m = 2; // number of distinct clusters
@@ -25,10 +25,10 @@ var n = served + unserved, // total number of nodes
 var color = function (d) {
   console.log(d);
   if (d == 0) {
-    return "lightgrey";
+    return "yellow";
     }
   else {
-    return "black";
+    return "darkgrey";
   }
 };
 
@@ -111,6 +111,19 @@ function drawBubbles () {
         return d;
   });
 
+  var labels = d3.range(m).map(function(num) {
+    var i = 0,
+        r = 10,
+        d = {
+          cluster: i,
+          radius: r,
+          x: Math.cos(i / m * 2 * Math.PI) * 200 + width2 / 2 + Math.random(),
+          y: Math.sin(i / m * 2 * Math.PI) * 200 + height2 / 2 + Math.random()
+        };
+      if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
+        return d;
+  });
+
 
   var force = d3.forceSimulation()
   
@@ -139,7 +152,6 @@ function drawBubbles () {
     .style("stroke", "#e6e6e6")
     .style("fill", function(d) { return color(d.cluster/10); });
 
-
   svg2.append("text")
     .text("served: "+served+" households")
     .attr("color", "black")
@@ -152,6 +164,22 @@ function drawBubbles () {
     .attr("dx", 700)
     .attr("dy", 50);
 
+  console.log(labels);
+
+  function Label(cluster, radius, text) {
+    this.cluster = cluster;
+    this.radius = radius;
+    this.text = text;
+  };
+
+  var label0 = new Label(0, 1, "text0");
+  var label1 = new Label(1, 1, "text1");
+
+  labels = [label0, label1];
+
+
+  console.log(nodes);
+
   function layoutTick(e) {
   node
     .attr("cx", function(d) { return d.x; })
@@ -159,11 +187,9 @@ function drawBubbles () {
     .attr("r", function(d) { return d.radius; });
   }
 
+/*var labels = [{text: "HELLO", cluster: 0, radius: 0},{text: "GOODBYE", cluster: 1, radius: 0}];*/
 
-
-} //End of drawBubbles function
-
-
+}; //End of drawBubbles function
 
 
 
@@ -275,6 +301,11 @@ var scrollVis = function () {
    * @param histData - binned histogram data
    */
 
+
+  var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
   var setupVis = function (pa) {
 
    /* var burden = g.selectAll('.burden').data(pa);
@@ -292,7 +323,7 @@ var scrollVis = function () {
       .style("stroke-width","1px")
       .style("fill", "white")
       .attr('opacity', 0);
-      
+        
       
     svg.append('g')
       .selectAll("path")
@@ -327,8 +358,41 @@ var scrollVis = function () {
         console.log("hiiiiiiiiii");
         d3.selectAll("#bubbles svg").remove();
         drawBubbles();
-      });
+      })
+//Mouseover from https://bl.ocks.org/d3noob/257c360b3650b9f0a52dd8257d7a2d73
+      .on("mouseover", function(d){
+          d3.select(this)
+          .style("stroke","yellow")
+          .raise()
+          .style("stroke-width", "2px");
+          div.transition()
+            .duration(200)
+            .style("opacity", 1);
+          div.html(toolTipText(d))
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 28) + "px");
+        })
+      .on("mouseout", function(d){
+          d3.select(this).style("stroke","white")
+            .style("stroke-width", "1px");
+          div.transition()
+            .duration(500)
+            .style("opacity", 0);
+        });
 
+};
+
+
+var toolTipText = function (a) {
+  if (d3.selectAll('.blank').attr('opacity') == 1) {
+    return a.properties.NAMELSAD;
+  }
+  if (d3.selectAll('.burden').attr('opacity') == 1) {
+    return (a.properties.NAMELSAD+("<br />")+a.properties.ELIG_B);
+  }
+  if (d3.selectAll('.HCVCount').attr('opacity') == 1) {
+    return "HCV";
+  }
 };
 
 /**
@@ -383,6 +447,7 @@ var scrollVis = function () {
       console.log("show up");
 
     d3.selectAll('.blank')
+      .raise()
       .transition()
       .duration(0)
       .attr('opacity', 1.0);
@@ -415,6 +480,7 @@ var scrollVis = function () {
       .attr('opacity', 0);
 
     d3.selectAll('.burden')
+      .raise()
       .transition()
       .duration(750)
       .attr('opacity', 1.0);
@@ -435,6 +501,7 @@ var scrollVis = function () {
       .attr('opacity', 0);
 
     d3.selectAll('.HCVCount')
+      .raise()
       .transition()
       .duration(750)
       .attr('opacity', 1.0);

@@ -55,9 +55,23 @@ a:active {
 }
 
 .subtitle {
+  font-size: 12px;
+  font-family: 'droid sans mono', monospace;
   text-align: center;
 }
 
+div.tooltip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 2px;
+  font-size: 12px;
+  font-family: 'droid sans mono', monospace;
+  background-color: yellow;
+  border: 0px;
+  pointer-events: none;
+}
 
 
 #countyname {
