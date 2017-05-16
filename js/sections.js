@@ -1,6 +1,8 @@
 
 // Bubbles Code
 
+//https://bl.ocks.org/ericsoco/cd0c38a20141e997e926592264067db3
+
 //from http://stackoverflow.com/questions/3883342/add-commas-to-a-number-in-jquery
 function commaSeparateNumber(val){
   while (/(\d+)(\d{3})/.test(val.toString())){
@@ -152,37 +154,37 @@ function drawBubbles () {
 
   var text1 = svg2.append("text")
     .text("served:")
-    .attr("x", 200)
-    .attr("y", 20);
+    .attr("x", 175)
+    .attr("y", 50);
 
   text1.append("tspan")
     .text(commaSeparateNumber(served))
     .attr("dy", "40px")
-    .attr("x", 200)
+    .attr("x", 175)
     .style("font-size", "50px")
     .style("font-weight", "900");
 
   text1.append("tspan")
     .text("households")
     .attr("dy", "20px")
-    .attr("x", 200);
+    .attr("x", 175);
 
   var text2 = svg2.append("text")
     .text("unserved:")
-    .attr("x", 625)
-    .attr("y", 20);
+    .attr("x", 650)
+    .attr("y", 50);
 
   text2.append("tspan")
     .text(commaSeparateNumber(unserved))
     .attr("dy", "40px")
-    .attr("x", 625)
+    .attr("x", 650)
     .style("font-size", "50px")
     .style("font-weight", "900");
 
   text2.append("tspan")
     .text("households")
     .attr("dy", "20px")
-    .attr("x", 625);
+    .attr("x", 650);
 
 
 
