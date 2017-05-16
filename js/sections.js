@@ -480,6 +480,7 @@ var scrollVis = function () {
     d3.selectAll(".legendBurden")
       .call(legend1)
       .transition()
+      .delay(10000)
       .duration(750)
       .attr('opacity', 1.0);
 
@@ -497,6 +498,12 @@ var scrollVis = function () {
     d3.selectAll('.burden')
       .transition()
       .duration(750)
+      .attr('opacity', 0);
+
+    d3.selectAll(".legendBurden")
+      .call(legend1)
+      .transition()
+      .duration(500)
       .attr('opacity', 0);
 
     d3.selectAll('.HCVCount')
