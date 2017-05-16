@@ -1,6 +1,14 @@
 
 // Bubbles Code
 
+//from http://stackoverflow.com/questions/3883342/add-commas-to-a-number-in-jquery
+function commaSeparateNumber(val){
+  while (/(\d+)(\d{3})/.test(val.toString())){
+    val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+  }
+  return val;
+}
+
 var clusters = null; //create empty clusters variable
 
 var served = null,
@@ -111,24 +119,11 @@ function drawBubbles () {
         return d;
   });
 
-  var labels = d3.range(m).map(function(num) {
-    var i = 0,
-        r = 10,
-        d = {
-          cluster: i,
-          radius: r,
-          x: Math.cos(i / m * 2 * Math.PI) * 200 + width2 / 2 + Math.random(),
-          y: Math.sin(i / m * 2 * Math.PI) * 200 + height2 / 2 + Math.random()
-        };
-      if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
-        return d;
-  });
-
 
   var force = d3.forceSimulation()
   
   // keep entire simulation balanced around screen center
-    .force('center', d3.forceCenter(width2/2, height2/2))
+    .force('center', d3.forceCenter(width2/1.5, height2/2))
 
   // cluster by section
     .force('cluster', cluster()
@@ -152,30 +147,43 @@ function drawBubbles () {
     .style("stroke", "#e6e6e6")
     .style("fill", function(d) { return color(d.cluster/10); });
 
-  svg2.append("text")
-    .text("served: "+served+" households")
-    .attr("color", "black")
-    .attr("dx", 50)
-    .attr("dy", 50);
 
-  svg2.append("text")
-    .text("unserved: "+unserved+" households")
-    .attr("color", "black")
-    .attr("dx", 700)
-    .attr("dy", 50);
+//On tspans: http://stackoverflow.com/questions/24032397/inserting-new-line-in-html-using-d3
 
-  console.log(labels);
+  var text1 = svg2.append("text")
+    .text("served:")
+    .attr("x", 200)
+    .attr("y", 20);
 
-  function Label(cluster, radius, text) {
-    this.cluster = cluster;
-    this.radius = radius;
-    this.text = text;
-  };
+  text1.append("tspan")
+    .text(commaSeparateNumber(served))
+    .attr("dy", "40px")
+    .attr("x", 200)
+    .style("font-size", "50px")
+    .style("font-weight", "900");
 
-  var label0 = new Label(0, 1, "text0");
-  var label1 = new Label(1, 1, "text1");
+  text1.append("tspan")
+    .text("households")
+    .attr("dy", "20px")
+    .attr("x", 200);
 
-  labels = [label0, label1];
+  var text2 = svg2.append("text")
+    .text("unserved:")
+    .attr("x", 625)
+    .attr("y", 20);
+
+  text2.append("tspan")
+    .text(commaSeparateNumber(unserved))
+    .attr("dy", "40px")
+    .attr("x", 625)
+    .style("font-size", "50px")
+    .style("font-weight", "900");
+
+  text2.append("tspan")
+    .text("households")
+    .attr("dy", "20px")
+    .attr("x", 625);
+
 
 
   console.log(nodes);
@@ -384,13 +392,13 @@ var scrollVis = function () {
 
 
 var toolTipText = function (a) {
-  if (d3.selectAll('.blank').attr('opacity') == 1) {
+  if (d3.selectAll('.blank').attr('opacity') > .5) {
     return a.properties.NAMELSAD;
   }
-  if (d3.selectAll('.burden').attr('opacity') == 1) {
-    return (a.properties.NAMELSAD+("<br />")+a.properties.ELIG_B);
+  if (d3.selectAll('.burden').attr('opacity') > .5) {
+    return (a.properties.NAMELSAD+("<br />")+commaSeparateNumber(a.properties.ELIG_B));
   }
-  if (d3.selectAll('.HCVCount').attr('opacity') == 1) {
+  if (d3.selectAll('.HCVCount').attr('opacity') > .5) {
     return "HCV";
   }
 };
