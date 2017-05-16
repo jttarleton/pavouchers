@@ -230,7 +230,9 @@ var scrollVis = function () {
         .labelFormat(d3.format(".2f"))
         .labels(d3.legendHelpers.thresholdLabels)
         .useClass(true)
-        .scale(color1);
+        .scale(color1)
+        .title("Percent of Households that are Cost Burdened")
+        .titleWidth(200);
 
      var legend2 = d3.legendColor()
         .labelFormat(d3.format(".2f"))
@@ -298,6 +300,14 @@ var scrollVis = function () {
    * @param histData - binned histogram data
    */
 
+var svg3 = d3.select("#leftmargin").append("svg")
+    .attr("width", 300)
+    .attr("height", height2);
+
+var svg4 = d3.select("#rightmargin").append("svg")
+    .attr("width", 300)
+    .attr("height", height2);
+
   var setupVis = function (pa) {
 
    /* var burden = g.selectAll('.burden').data(pa);
@@ -316,16 +326,10 @@ var scrollVis = function () {
       .style("fill", "white")
       .attr('opacity', 0);
     
-    svg.append("g")
+    svg3.append("g")
       .attr("class", "legendBurden burden")
       .attr("transform", "translate(20,20)")
       .attr('opacity', 0);
-
-    svg.append("text")
-      .attr("class", "title burden")
-      .attr('x', width / 2)
-      .attr('y', height / 3)
-      .text('% of Very & Extremely Low Income PAers Who Are Housing Cost Burdened')
       
     svg.append('g')
       .selectAll("path")
@@ -340,7 +344,7 @@ var scrollVis = function () {
       .style("stroke-width","1px")
       .attr('opacity', 0);
 
-    svg.append("g")
+    svg4.append("g")
           .attr("class", "legendHCVCount HCVCount")
           .attr("transform", "translate(20,20)")
           .attr('opacity', 0);
@@ -371,7 +375,7 @@ var scrollVis = function () {
       });
 
 
-      svg.append("g")
+      svg3.append("g")
           .attr("class", "legendHCVHH HCVHH")
           .attr("transform", "translate(20,20)")
           .attr('opacity', 0);
