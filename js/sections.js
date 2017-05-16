@@ -292,7 +292,7 @@ var scrollVis = function () {
 
     svg.append('g')
       .selectAll("path")
-      .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
+      .data(topojson.feature(pa, pa.objects.hcv_data).features)
       .enter().append("path")
       .attr("d", path)
       .attr("class", "blank")
@@ -303,13 +303,18 @@ var scrollVis = function () {
     
     svg.append("g")
       .attr("class", "legendThreshold burden")
-      //.attr("class", "burden")
       .attr("transform", "translate(20,20)")
       .attr('opacity', 0);
+
+    svg.append("text")
+      .attr("class", "title burden")
+      .attr('x', width / 2)
+      .attr('y', height / 3)
+      .text('HOUSING COST BURDEN')
       
     svg.append('g')
       .selectAll("path")
-      .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
+      .data(topojson.feature(pa, pa.objects.hcv_data).features)
       .enter().append("path")
       .attr("d", path)
       .attr("class", function(d) {
@@ -323,7 +328,7 @@ var scrollVis = function () {
 
     svg.append('g')
       .selectAll("path")
-      .data(topojson.feature(pa, pa.objects.PA_Counties_jc).features)
+      .data(topojson.feature(pa, pa.objects.hcv_data).features)
       .enter().append("path")
       .attr("d", path)
       .attr("class", "HCVCount")
@@ -391,20 +396,19 @@ var scrollVis = function () {
   function showBlank() {
     d3.selectAll('.burden')
       .transition()
-      .duration(0)
+      .duration(750)
       .attr('opacity', 0);
-      console.log("show up");
 
     d3.selectAll('.blank')
       .transition()
       .duration(0)
       .attr('opacity', 1.0);
-      console.log("really show up");
 
     d3.selectAll('.HCVCount')
       .transition()
       .duration(0)
       .attr('opacity', 0);
+
   }
 
   /**
@@ -420,7 +424,6 @@ var scrollVis = function () {
       .transition()
       .duration(2000)
       .attr('opacity', 0);
-      console.log("2ndmap");
 
     d3.selectAll('.HCVCount')
       .transition()
@@ -434,8 +437,9 @@ var scrollVis = function () {
 
     d3.selectAll(".legendThreshold")
       .call(legend)
+      .transition()
+      .duration(750)
       .attr('opacity', 1.0);
-      console.log("legends of the fall");
 
   }
 
@@ -517,6 +521,6 @@ function display(pa) {
 }
 
 // load data and display
-d3.json('data/hcv_pa_simp.json', display);
+d3.json('data/hcv_data.json', display);
 
 
