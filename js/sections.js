@@ -213,7 +213,10 @@ var scrollVis = function () {
 
     var color2 = d3.scaleThreshold()
         .domain([100, 500, 1000, 1500, 2000, 4000, 10000, 15000])
-        .range(["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]);
+        //.range(["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]);
+        .range(d3.range(9).map(function(i) {
+          return "b" + i + "-9";
+        }));
 
     var color3 = d3.scaleThreshold()
         .domain([.2, .5, 1, 1.5, 2, 2.5, 3, 3.5])
@@ -223,11 +226,23 @@ var scrollVis = function () {
         .domain([-0.5, -0.25, -0.1, 0.0, 0.1, 0.25, .5])
         .range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
     
-    var legend = d3.legendColor()
+    var legend1 = d3.legendColor()
         .labelFormat(d3.format(".2f"))
         .labels(d3.legendHelpers.thresholdLabels)
         .useClass(true)
         .scale(color1);
+
+     var legend2 = d3.legendColor()
+        .labelFormat(d3.format(".2f"))
+        .labels(d3.legendHelpers.thresholdLabels)
+        .useClass(true)
+        .scale(color2);
+
+      var legend3 = d3.legendColor()
+        .labelFormat(d3.format(".2f"))
+        .labels(d3.legendHelpers.thresholdLabels)
+        .useClass(true)
+        .scale(color3);
 
     // When scrolling to a new section
     // the activation function for that
@@ -302,7 +317,7 @@ var scrollVis = function () {
       .attr('opacity', 0);
     
     svg.append("g")
-      .attr("class", "legendThreshold burden")
+      .attr("class", "legendBurden burden")
       .attr("transform", "translate(20,20)")
       .attr('opacity', 0);
 
@@ -310,7 +325,7 @@ var scrollVis = function () {
       .attr("class", "title burden")
       .attr('x', width / 2)
       .attr('y', height / 3)
-      .text('HOUSING COST BURDEN')
+      .text('% of Very & Extremely Low Income PAers Who Are Housing Cost Burdened')
       
     svg.append('g')
       .selectAll("path")
@@ -318,25 +333,33 @@ var scrollVis = function () {
       .enter().append("path")
       .attr("d", path)
       .attr("class", function(d) {
-        console.log(color1(d.properties.BRD_T_P));
-        return "burden " + color1(d.properties.BRD_T_P);
+        console.log(color1(d.properties.ELIG_B_P));
+        return "burden " + color1(d.properties.ELIG_B_P);
       })
       .style("stroke", "white")
       .style("stroke-width","1px")
       .attr('opacity', 0);
 
+    svg.append("g")
+          .attr("class", "legendHCVCount HCVCount")
+          .attr("transform", "translate(20,20)")
+          .attr('opacity', 0);
 
     svg.append('g')
       .selectAll("path")
       .data(topojson.feature(pa, pa.objects.hcv_data).features)
       .enter().append("path")
       .attr("d", path)
-      .attr("class", "HCVCount")
+      //.attr("class", "HCVCount")//
+      .attr("class", function(d) {
+        console.log(color2(d.properties.HCV));
+        return "HCVCount " + color2(d.properties.HCV);
+      })
       .style("stroke", "white")
       .style("stroke-width","1px")
-      .style("fill", function(d) {
+      /*.style("fill", function(d) {
       return color2(d.properties.HCV);
-      })
+      })*/
       .on("click", function(d){
         d3.select("#countyname").text(d.properties.NAMELSAD);
         served = +d.properties.HCV;
@@ -346,6 +369,25 @@ var scrollVis = function () {
         d3.selectAll("#bubbles svg").remove();
         drawBubbles();
       });
+
+
+      svg.append("g")
+          .attr("class", "legendHCVHH HCVHH")
+          .attr("transform", "translate(20,20)")
+          .attr('opacity', 0);
+
+      svg.append('g')
+        .selectAll("path")
+        .data(topojson.feature(pa, pa.objects.hcv_data).features)
+        .enter().append("path")
+        .attr("d", path)
+        .attr("class", function(d) {
+          console.log(color3(d.properties.HCV_HH));
+          return "HCVHH " + color3(d.properties.HCV_HH);
+        })
+        .style("stroke", "white")
+        .style("stroke-width","1px")
+        .attr('opacity', 0);
 
 };
 
@@ -362,8 +404,8 @@ var scrollVis = function () {
     activateFunctions[0] = showBlank;
     activateFunctions[1] = showBurden;
     activateFunctions[2] = showHCVCount;
-    /*activateFunctions[3] = showHCVHH;
-    activateFunctions[4] = showELIGBUNT;
+    activateFunctions[3] = showHCVHH;
+    /*activateFunctions[4] = showELIGBUNT;
     activateFunctions[5] = showElection;
     activateFunctions[6] = showRurban;*/
 
@@ -435,8 +477,8 @@ var scrollVis = function () {
       .duration(750)
       .attr('opacity', 1.0);
 
-    d3.selectAll(".legendThreshold")
-      .call(legend)
+    d3.selectAll(".legendBurden")
+      .call(legend1)
       .transition()
       .duration(750)
       .attr('opacity', 1.0);
@@ -461,10 +503,52 @@ var scrollVis = function () {
       .transition()
       .duration(750)
       .attr('opacity', 1.0);
+
+    d3.selectAll(".legendHCVCount")
+      .call(legend2)
+      .transition()
+      .duration(750)
+      .attr('opacity', 1.0);
+
+      d3.selectAll('.HCVHH')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
   }
 
 
 /**
+
+
+  /**
+   * showHCVHH - hcv per household choropleth
+   *
+   * hides: burden map
+   * hides: hcv per household map
+   * shows: hcv count choropleth
+   *
+   */
+  function showHCVHH() {
+    d3.selectAll('.HCVHH')
+      .transition()
+      .duration(750)
+      .attr('opacity', 1);
+
+    d3.selectAll('.HCVCount')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+    d3.selectAll(".legendHCVCount")
+      .call(legend2)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+  }
+
+
+/**
+
    * activate -
    *
    * @param index - index of the activated section
