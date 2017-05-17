@@ -249,14 +249,14 @@ var scrollVis = function () {
         .labels(["Less than 45%", "45% to 50%", "50% to 55%", "55% to 60%", "60% to 65%", "More than 65%"])
         .useClass(true)
         .scale(color1)
-        .title("% of Households that are Rent Burdened")
+        .title("% of Renting Households that are Cost Burdened")
         .titleWidth(200)
         ;
     
 
      var legend2 = d3.legendColor()
         .labelFormat(d3.format("0,"))
-        .labels([d3.legendHelpers.thresholdLabels])
+        .labels(d3.legendHelpers.thresholdLabels)
         .useClass(true)
         .scale(color2)
         .title("# of Housing Choice Vouchers")
@@ -888,6 +888,8 @@ function display(pa) {
   });
 
 }
+
+
 
 
 
