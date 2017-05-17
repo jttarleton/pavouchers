@@ -240,28 +240,30 @@ var scrollVis = function () {
         }));
 
     var color6 = d3.scaleOrdinal()
-        .domain(["Rural", "Urban"])
+        .domain(["Rural Counties", "Urban Counties"])
         .range(["#b2df8a", "#1f78b4"]);
     
 
     var legend1 = d3.legendColor()
         .labelFormat(d3.format(".0%"))
-        .labels(d3.legendHelpers.thresholdLabels)
+        .labels(["Less than 45%", "45% to 50%", "50% to 55%", "55% to 60%", "60% to 65%", "More than 65%"])
         .useClass(true)
         .scale(color1)
         .title("% of Households that are Rent Burdened")
-        .titleWidth(200);
+        .titleWidth(200)
+        ;
+    
 
      var legend2 = d3.legendColor()
         .labelFormat(d3.format("0,"))
-        .labels(d3.legendHelpers.thresholdLabels)
+        .labels([d3.legendHelpers.thresholdLabels])
         .useClass(true)
         .scale(color2)
         .title("# of Housing Choice Vouchers")
         .titleWidth(200);
 
       var legend3 = d3.legendColor()
-        .labelFormat(d3.format(".2f"))
+        .labelFormat(d3.format("0"))
         .labels(d3.legendHelpers.thresholdLabels)
         .useClass(true)
         .scale(color3)
@@ -274,7 +276,8 @@ var scrollVis = function () {
         .useClass(true)
         .scale(color4)
         .title("% of Households that are Eligible for Vouchers & Housing Cost Burdened But Unserved")
-        .titleWidth(200);
+        .titleWidth(200)
+        .labels(["Less than 10%", "10% to 15%", "15% to 20%", "More than 20%"]);
 
       var legend5 = d3.legendColor()
         .labelFormat(d3.format("0"))
@@ -282,7 +285,9 @@ var scrollVis = function () {
         .useClass(true)
         .scale(color5)
         .title("Trump v. Clinton Margin of Victory")
-        .titleWidth(200);
+        .titleWidth(200)
+        .labels(["50% or more (Clinton)",
+        "50% to 25%", "25% to 10%", "10% to 0%", "0% to 10%", "10% to 25%", "25% to 50%", "50% or more (Trump)"]);
 
       var legend6 = d3.legendColor()
         //d3 symbol creates a path-string, for example
@@ -290,7 +295,7 @@ var scrollVis = function () {
         //8.059274488676564 -9.306048591020996,8.059274488676564Z"
         .shape("path", d3.symbol().type(d3.symbolSquare).size(200)())
         .shapePadding(10)
-        .cellFilter(function(d){ return d.label !== "R","U" })
+        .cellFilter(function(d){ return d.label !== "R" && d.label !== "U" })
         //.cellFilter(function(d){ return d.label !== "U" })
         .scale(color6);
 
@@ -375,9 +380,10 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .attr('opacity', 0);
     
     svg3.append("g")
-      .attr("class", "legendBurden burden")
+      .attr("class", "legendBurden legend burden")
       .attr("transform", "translate(20,20)")
-      .attr('opacity', 0);
+      .attr('opacity', 0)
+      .style("font-size", "15px");
       
     svg.append('g')
       .selectAll("path")
@@ -393,7 +399,7 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .attr('opacity', 0);
 
     svg4.append("g")
-          .attr("class", "legendHCVCount HCVCount")
+          .attr("class", "legendHCVCount legend HCVCount")
           .attr("transform", "translate(20,20)")
           .attr('opacity', 0);
 
@@ -424,7 +430,7 @@ var svg4 = d3.select("#rightmargin").append("svg")
 
 
       svg3.append("g")
-          .attr("class", "legendHCVHH HCVHH")
+          .attr("class", "legendHCVHH legend HCVHH")
           .attr("transform", "translate(20,20)")
           .attr('opacity', 0);
 
@@ -455,7 +461,7 @@ var svg4 = d3.select("#rightmargin").append("svg")
         .attr('opacity', 0);
 
         svg4.append("g")
-          .attr("class", "legendELIGBUNT_HHT ELIGBUNT_HHT")
+          .attr("class", "legendELIGBUNT_HHT legend ELIGBUNT_HHT")
           .attr("transform", "translate(20,20)")
           .attr('opacity', 0);
 
@@ -474,7 +480,7 @@ var svg4 = d3.select("#rightmargin").append("svg")
           .attr('opacity', 0);
 
         svg3.append("g")
-          .attr("class", "legendMVICT")
+          .attr("class", "legendMVICT legend MVICT")
           .attr("transform", "translate(20,20)")
           .attr('opacity', 0);
 
@@ -497,10 +503,19 @@ var svg4 = d3.select("#rightmargin").append("svg")
             })*/
           .style("stroke", "white")
           .style("stroke-width","1px")
-          .attr('opacity', 0);
+          .attr('opacity', 0)
+          .on("click", function(d){
+        d3.select("#countyname").text(d.properties.NAMELSAD);
+        served = +d.properties.HCV;
+        unserved = +d.properties.ELIG_B;
+        n = (served + unserved)*bubbleFactor;
+        console.log("hiiiiiiiiii");
+        d3.selectAll("#bubbles svg").remove();
+        drawBubbles();
+      });
 
         svg4.append("g")
-          .attr("class", "legendRURBAN")
+          .attr("class", "legendRURBAN legend RURBAN")
           .attr("transform", "translate(20,20)")
           .attr('opacity', 0);
 
@@ -873,6 +888,8 @@ function display(pa) {
   });
 
 }
+
+
 
 // load data and display
 d3.json('data/hcv_data.json', display);
