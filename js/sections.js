@@ -204,10 +204,10 @@ var scrollVis = function () {
 
 
     var color1 = d3.scaleThreshold()
-        .domain([0.25, .3, 0.35, 0.4, .45, .5, .55, .6])
+        .domain([0.45, .5, 0.55, 0.6, .65])
         //.range(["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]);
-        .range(d3.range(9).map(function(i) {
-          return "q" + i + "-9";
+        .range(d3.range(6).map(function(i) {
+          return "q" + i + "-6";
         }));
 
 
@@ -219,32 +219,65 @@ var scrollVis = function () {
         }));
 
     var color3 = d3.scaleThreshold()
-        .domain([.2, .5, 1, 1.5, 2, 2.5, 3, 3.5])
-        .range(["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]);
+        .domain([.5, 1, 1.5, 2, 2.5, 3, 3.5])
+        //.range(["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]);
+        .range(d3.range(8).map(function(i) {
+          return "c" + i + "-8";
+        }));
 
     var color4 = d3.scaleThreshold()
+        .domain([0.1, 0.15, 0.2])
+        //.range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
+        .range(d3.range(4).map(function(i) {
+          return "d" + i + "-4";
+        }));
+
+    var color5 = d3.scaleThreshold()
         .domain([-0.5, -0.25, -0.1, 0.0, 0.1, 0.25, .5])
-        .range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
-    
+        //.range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
+        .range(d3.range(9).map(function(i) {
+          return "d" + i + "-9";
+        }));
+
+    var color6 = d3.scaleOrdinal()
+        .domain([-0.5, -0.25, -0.1, 0.0, 0.1, 0.25, .5])
+        //.range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
+        .range(d3.range(9).map(function(i) {
+          return "d" + i + "-9";
+        }));
+
+
     var legend1 = d3.legendColor()
-        .labelFormat(d3.format(".2f"))
+        .labelFormat(d3.format(".0%"))
         .labels(d3.legendHelpers.thresholdLabels)
         .useClass(true)
         .scale(color1)
-        .title("Percent of Households that are Cost Burdened")
+        .title("% of Households that are Rent Burdened")
         .titleWidth(200);
 
      var legend2 = d3.legendColor()
-        .labelFormat(d3.format(".2f"))
+        .labelFormat(d3.format("0,"))
         .labels(d3.legendHelpers.thresholdLabels)
         .useClass(true)
-        .scale(color2);
+        .scale(color2)
+        .title("# of Housing Choice Vouchers")
+        .titleWidth(200);
 
       var legend3 = d3.legendColor()
         .labelFormat(d3.format(".2f"))
         .labels(d3.legendHelpers.thresholdLabels)
         .useClass(true)
-        .scale(color3);
+        .scale(color3)
+        .title("# of Housing Choice Vouchers per 100 Households")
+        .titleWidth(200);
+
+      var legend4 = d3.legendColor()
+        .labelFormat(d3.format("0,"))
+        .labels(d3.legendHelpers.thresholdLabels)
+        .useClass(true)
+        .scale(color4)
+        .title("% of Households that are Eligible for Vouchers & Housing Cost Burdened But Unserved")
+        .titleWidth(200);
 
     // When scrolling to a new section
     // the activation function for that
@@ -337,8 +370,8 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .enter().append("path")
       .attr("d", path)
       .attr("class", function(d) {
-        console.log(color1(d.properties.ELIG_B_P));
-        return "burden " + color1(d.properties.ELIG_B_P);
+        console.log(color1(d.properties.BRD_RENT_P));
+        return "burden " + color1(d.properties.BRD_RENT_P);
       })
       .style("stroke", "white")
       .style("stroke-width","1px")
@@ -386,12 +419,30 @@ var svg4 = d3.select("#rightmargin").append("svg")
         .enter().append("path")
         .attr("d", path)
         .attr("class", function(d) {
-          console.log(color3(d.properties.HCV_HH));
-          return "HCVHH " + color3(d.properties.HCV_HH);
+          console.log(color3(d.properties.HCV_HH*100));
+          return "HCVHH " + color3(d.properties.HCV_HH*100);
         })
         .style("stroke", "white")
         .style("stroke-width","1px")
         .attr('opacity', 0);
+
+      svg.append('g')
+        .selectAll("path")
+        .data(topojson.feature(pa, pa.objects.hcv_data).features)
+        .enter().append("path")
+        .attr("d", path)
+        .attr("class", function(d) {
+          console.log(color4(d.properties.ELIGBUNT/d.properties.HH_T));
+          return "ELIGBUNT_HHT " + color4(d.properties.ELIGBUNT/d.properties.HH_T);
+        })
+        .style("stroke", "white")
+        .style("stroke-width","1px")
+        .attr('opacity', 0);
+
+        svg4.append("g")
+          .attr("class", "legendELIGBUNT_HHT ELIGBUNT_HHT")
+          .attr("transform", "translate(20,20)")
+          .attr('opacity', 0);
 
 };
 
@@ -409,8 +460,8 @@ var svg4 = d3.select("#rightmargin").append("svg")
     activateFunctions[1] = showBurden;
     activateFunctions[2] = showHCVCount;
     activateFunctions[3] = showHCVHH;
-    /*activateFunctions[4] = showELIGBUNT;
-    activateFunctions[5] = showElection;
+    activateFunctions[4] = showELIGBUNT_HHT;
+    /*activateFunctions[5] = showElection;
     activateFunctions[6] = showRurban;*/
 
   };
@@ -476,6 +527,12 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .duration(750)
       .attr('opacity', 0);
 
+    d3.selectAll(".legendHCVCount")
+      .call(legend2)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
     d3.selectAll('.burden')
       .transition()
       .duration(750)
@@ -521,7 +578,13 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .duration(750)
       .attr('opacity', 1.0);
 
-      d3.selectAll('.HCVHH')
+    d3.selectAll('.HCVHH')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+    d3.selectAll(".legendHCVHH")
+      .call(legend3)
       .transition()
       .duration(750)
       .attr('opacity', 0);
@@ -534,9 +597,9 @@ var svg4 = d3.select("#rightmargin").append("svg")
   /**
    * showHCVHH - hcv per household choropleth
    *
-   * hides: burden map
-   * hides: hcv per household map
-   * shows: hcv count choropleth
+   * hides: hcv count
+   * hides: eligbunt_hh
+   * shows: hcvhh
    *
    */
   function showHCVHH() {
@@ -544,6 +607,12 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .transition()
       .duration(750)
       .attr('opacity', 1);
+
+     d3.selectAll(".legendHCVHH")
+      .call(legend3)
+      .transition()
+      .duration(750)
+      .attr('opacity', 1.0);
 
     d3.selectAll('.HCVCount')
       .transition()
@@ -555,8 +624,50 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .transition()
       .duration(750)
       .attr('opacity', 0);
+
+    d3.selectAll('.ELIGBUNT_HHT')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+     d3.selectAll(".legendELIGBUNT_HHT")
+      .call(legend4)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
   }
 
+ /**
+   * showELIGBUNT_HHT 
+   *
+   * hides: HCVHH
+   * hides: MVICT
+   * shows: ELIGBUNT_HHT
+   *
+   */
+  function showELIGBUNT_HHT() {
+    d3.selectAll('.HCVHH')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+     d3.selectAll(".legendHCVHH")
+      .call(legend3)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+    d3.selectAll('.ELIGBUNT_HHT')
+      .transition()
+      .duration(750)
+      .attr('opacity', 1.0);
+
+     d3.selectAll(".legendELIGBUNT_HHT")
+      .call(legend4)
+      .transition()
+      .duration(750)
+      .attr('opacity', 1.0);
+  }
 
 /**
 
