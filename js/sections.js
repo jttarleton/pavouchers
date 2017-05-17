@@ -240,7 +240,7 @@ var scrollVis = function () {
         }));
 
     var color6 = d3.scaleOrdinal()
-        .domain(["R", "U"])
+        .domain(["Rural", "Urban"])
         .range(["#b2df8a", "#1f78b4"]);
     
 
@@ -288,8 +288,10 @@ var scrollVis = function () {
         //d3 symbol creates a path-string, for example
         //"M0,-8.059274488676564L9.306048591020996,
         //8.059274488676564 -9.306048591020996,8.059274488676564Z"
-        .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+        .shape("path", d3.symbol().type(d3.symbolSquare).size(200)())
         .shapePadding(10)
+        .cellFilter(function(d){ return d.label !== "R","U" })
+        //.cellFilter(function(d){ return d.label !== "U" })
         .scale(color6);
 
     // When scrolling to a new section
@@ -482,10 +484,17 @@ var svg4 = d3.select("#rightmargin").append("svg")
           .data(topojson.feature(pa, pa.objects.hcv_data).features)
           .enter().append("path")
           .attr("d", path)
-          .attr("class", function(d) {
-            console.log(color6(d.properties.RURBAN));
-            return "RURBAN " + color6(d.properties.RURBAN);
-          })
+          .attr("class", "RURBAN")
+          .style("fill", function(d) {
+            return color6(d.properties.RURURB)})
+
+          /*.style("fill", function(d) {
+            if (d.properties.RURURB == "R") {
+              return "red"
+            } else {
+              return "blue"
+            }
+            })*/
           .style("stroke", "white")
           .style("stroke-width","1px")
           .attr('opacity', 0);
@@ -515,7 +524,7 @@ var svg4 = d3.select("#rightmargin").append("svg")
     activateFunctions[3] = showHCVHH;
     activateFunctions[4] = showELIGBUNT_HHT;
     activateFunctions[5] = showElection;
-    /*activateFunctions[6] = showRurban;*/
+    activateFunctions[6] = showRURBAN;
 
   };
 
@@ -763,17 +772,27 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .transition()
       .duration(750)
       .attr('opacity', 0);
+
+    d3.selectAll('.RURBAN')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+     d3.selectAll(".legendRURBAN")
+      .call(legend6)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
   }
 
 /**
-   * showElection 
+   * showRURBAN 
    *
-   * hides: ELIGBUNT_HHT
-   * hides: RURBAN
-   * shows: Election
+   * hides: Election
+   * shows: RURBAN
    *
    */
-  function showElection() {
+  function showRURBAN() {
     d3.selectAll('.MVICT')
       .transition()
       .duration(750)
@@ -791,7 +810,7 @@ var svg4 = d3.select("#rightmargin").append("svg")
       .attr('opacity', 1);
 
      d3.selectAll(".legendRURBAN")
-      .call(legend4)
+      .call(legend6)
       .transition()
       .duration(750)
       .attr('opacity', 1);
