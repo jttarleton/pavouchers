@@ -143,9 +143,53 @@ circle {
   display: block;
   text-align: center;
   height: auto;
-  min-height: 300px;
   z-index: 5;
 
 }
 
+/* ----- Table ----- */
+
+.button1 {
+  border: 1px solid red;
+  height: 25px;
+  text-align: center;
+}
+
+.button2 {
+  border: 1px solid blue;
+  height: 25px;
+  text-align: center;
+}
+
+
+table {
+  border-collapse: collapse;
+  font: 10px sans-serif;
+  /*width: 720px;*/
+}
+
+td {
+  padding: 0;
+}
+
+th {
+  font-weight: normal;
+  text-align: right;
+  min-width: 43px;
+}
+
+thead td {
+  cursor: s-resize;
+  padding: 0;
+}
+
+tbody tr:first-child td {
+  /*padding-top: 2px;*/
+  padding-right: 0px;
+}
+
+tbody td {
+  padding: 0;
+  border-left: solid 1px #000;
+}
 

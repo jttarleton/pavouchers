@@ -19,6 +19,7 @@
   <!-- <script src="js/bubbles.js"></script>-->
   <script src="js/scroller.js"></script>
   <script src="js/sections.js"></script>
+  <script src="js/table.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -114,9 +115,26 @@
       </div> <!--END OF COLUMN DIV -->
     </div> <!--END OF ROW DIV -->
 
-    <div id="bubbles">
-      <p class="subtitle">Explore the counties</p>
+    <div class="row">
+      <div class="button1 col-md-2 col-md-offset-4">RED</div>
+      <div class="button2 col-md-2" onclick="buttonClick()">BLUE</div>
     </div>
+
+    <div id="bubbles">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>HEAD</th>
+          <td id="td1">Young</td>
+          <td>Old</td>
+          <td>Other</td>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
 
   </div> <!--END OF CONTAINER DIV -->
 </div> <!--END OF GRAPHIC DIV -->
