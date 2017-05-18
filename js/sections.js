@@ -35,10 +35,10 @@ var n = served + unserved, // total number of nodes
 var color = function (d) {
   console.log(d);
   if (d == 0) {
-    return "yellow";
+    return "black";
     }
   else {
-    return "darkgrey";
+    return "lightgrey";
   }
 };
 
@@ -649,7 +649,7 @@ var toolTipText = function (a) {
     return (a.properties.NAMELSAD+("<br />")+a.properties.HCV+" vouchers");
   }
   if (d3.selectAll('.HCVHH').attr('opacity') > .5) {
-    return (a.properties.NAMELSAD+("<br />")+a.properties.HCV_HH*100+" vouchers per 100 households");
+    return (a.properties.NAMELSAD+("<br />")+(a.properties.HCV_HH*100).toFixed(1)+" vouchers per 100 households");
   }
   if (d3.selectAll('.ELIGBUNT_HHT').attr('opacity') > .5) {
     return (a.properties.NAMELSAD+("<br />")+Math.ceil(100*(a.properties.ELIGBUNT/a.properties.HH_T))+"% of county households that eligible<br />and rent burdened but unserved");
@@ -659,6 +659,9 @@ var toolTipText = function (a) {
   }
   if (d3.selectAll('.RURBAN').attr('opacity') > .5) {
     return (a.properties.NAMELSAD+("<br />")+rUrban(a.properties.RURURB));
+  }
+  if (d3.selectAll('.Un ').attr('opacity') > .5) {
+    return (a.properties.NAMELSAD+("<br />")+Math.ceil(a.properties.ELIGBUNT_P*100)+"% of eligible population unserved");
   }
 };
 
