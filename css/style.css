@@ -27,6 +27,9 @@ a:active {
 
 /* ----- Header and Map Area -----*/
 
+.legendContainer {
+  height: auto;
+}
 #header {
     position: fixed;
     text-align:center;
@@ -55,10 +58,11 @@ a:active {
   width:200px;
   z-index: 2;
   padding-left: 0px;
-  height: 400px;
+  height: auto;
+  padding-top: 75px;
   /*border: solid 1px blue;*/
   top: 0px;
-  right: 0px;
+  right: 5px;
 }
 
 #vis {
@@ -121,6 +125,14 @@ div.tooltip {
   font-size: 14px;
 }
 
+.label2 {
+  font-family: 'droid sans mono';
+  font-size: 10.5px;
+  font-weight: bold;
+  /*margin-left:25px;*/
+  color: lightgrey;
+}
+
 /*.counties :hover {
   fill: red;
 }*/
@@ -146,6 +158,15 @@ div.tooltip {
   z-index: 0;*/
 }
 
+#countyPanel2 {
+  visibility:hidden;
+  width: 200px;
+  height: auto;
+  position: fixed;
+  margin-left:20px;
+  padding-top:250px;
+}
+
 /*.step {
   margin-bottom: 100px;
 }
@@ -165,15 +186,22 @@ circle {
 }
 
 #bubbles {
-  border: solid 2px blue;
-  margin-left:auto;
-  margin-right:auto;
+  /*border: solid 2px blue;*/
   display: block;
   text-align: center;
-  height: auto;
-  min-height: 300px;
-  z-index: 5;
+  height: 100vh;
+  z-index: -1;
+  position: absolute;
+  left:0;
+  bottom: 0;
+  width:100%;
 
+}
+
+#bubbleHolder {
+  height:300px;
+  /*background-color: yellow;*/
+  position:relative;
 }
 
 /* ----- Table ----- */

@@ -38,8 +38,30 @@
 
 <div id='graphic'>
   <div id="header">
-    <div id="leftmargin"></div>
-    <div id="rightmargin"></div>
+    <div id="leftmargin">
+      <div id="countyPanel2">
+        <p id="panel1" class="legend">&nbsp;</p>
+        <p id="panel2" class="label2">&nbsp;</p>
+        <p id="panel3" class="label2">&nbsp;</p>
+        <p id="panel4" class="label2">&nbsp;</p>
+        <p id="panel5" class="label2">&nbsp;</p>
+        <p id="panel6" class="label2">&nbsp;</p>
+        <p id="panel7" class="label2">&nbsp;</p>
+        <p id="panel8" class="label2">&nbsp;</p>
+        <p id="panel9" class="label2">&nbsp;</p>
+        <svg style="width: 20px; height:20px">
+        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="lightgrey" /><p class="label2" style="display: inline">&nbsp;= ~ 100 served households</p>
+        </svg>
+        <svg style="width: 20px; height:20px">
+        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="#474747" /><p class="label2" style="display: inline">&nbsp;= ~ 100 unserved households</p>
+        </svg>
+
+      </div>
+    </div>
+    <div id="rightmargin">
+      <div id="countyPanel">
+      </div>
+    </div>
     <div>&nbsp;</div>
     <div id="vis"></div>
     <!-- <div id="countyname">&nbsp;</div> -->
@@ -128,18 +150,15 @@
       <div class="button2 col-md-2" onclick="buttonClick()">BLUE</div>
     </div> -->
 
-    <div id="bubbles">
-    </div>
-
 
 
   </div> <!--END OF CONTAINER DIV -->
+  <div id="bubbleHolder">
+    <div id="bubbles">
+    </div>
+  </div>
 </div> <!--END OF GRAPHIC DIV -->
 
-        <div class="space"></div>
 
-<!-- EXTRA CODE
-
--->
 </body>
 </html>
