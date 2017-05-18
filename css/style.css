@@ -44,7 +44,7 @@ a:active {
   z-index: 2;
   padding-left: 0px;
   height: 400px;
-  padding-top: 50px;
+  padding-top: 75px;
   /*border: solid 1px red;*/
 }
 
@@ -271,3 +271,11 @@ tbody td {
 .e1-8{fill:rgb(116,173,209)}
 .e0-8{fill:rgb(69,117,180)}
 
+
+/* -------- ELIGBUNT_P ------*/
+.f0-6{fill:rgb(247,247,247)}
+.f1-6{fill:rgb(217,217,217)}
+.f2-6{fill:rgb(189,189,189)}
+.f3-6{fill:rgb(150,150,150)}
+.f4-6{fill:rgb(99,99,99)}
+.f5-6{fill:rgb(37,37,37)}

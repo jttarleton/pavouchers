@@ -275,8 +275,15 @@ var scrollVis = function () {
       }));
 
     var color6 = d3.scaleOrdinal()
-      .domain(["Rural Counties", "Urban Counties"])
+      .domain(["Mostly or Completely Rural Counties", "Mostly Urban Counties"])
       .range(["#b2df8a", "#1f78b4"]);
+
+    var color7 = d3.scaleThreshold()
+      .domain([0.7, 0.75, 0.8, 0.85, 0.9])
+      //.range(["#2171b5", "#6baed6", "#bdd7e7", "#eff3ff", "#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]);
+      .range(d3.range(6).map(function(i) {
+        return "f" + i + "-6";
+      }));
     
 
     var legend1 = d3.legendColor()
@@ -318,7 +325,7 @@ var scrollVis = function () {
       .labels(d3.legendHelpers.thresholdLabels)
       .useClass(true)
       .scale(color5)
-      .title("Trump v. Clinton Margin of Victory")
+      .title("Trump vs. Clinton Margin of Victory")
       .titleWidth(200)
       .labels(["50% or more (Clinton)",
       "50% to 25%", "25% to 10%", "10% to 0%", "0% to 10%", "10% to 25%", "25% to 50%", "50% or more (Trump)"]);
@@ -331,7 +338,18 @@ var scrollVis = function () {
       .shapePadding(10)
       .cellFilter(function(d){ return d.label !== "R" && d.label !== "U" })
       //.cellFilter(function(d){ return d.label !== "U" })
+      .title("Rural & Urban")
       .scale(color6);
+
+    var legend7 = d3.legendColor()
+      .labelFormat(d3.format(".0%"))
+      .labels(d3.legendHelpers.thresholdLabels)
+      .useClass(true)
+      .scale(color7)
+      .title("% of Eligible Population Unserved")
+      .titleWidth(200)
+      .labels(["Less than 70%", "70% to 75%", "75% to 80%", "80% to 85%", "85% to 90%", "More than 90%"]);
+
 
     // When scrolling to a new section
     // the activation function for that
@@ -546,37 +564,26 @@ var scrollVis = function () {
         })*/
       .style("stroke", "white")
       .style("stroke-width","1px")
-      .attr('opacity', 0)
+      .attr('opacity', 0);
 
-      .on("click", function(d){
-        d3.select("#countyname").text(d.properties.NAMELSAD);
-        served = +d.properties.HCV;
-        unserved = +d.properties.ELIG_B;
-        n = (served + unserved)*bubbleFactor;
-        console.log("hiiiiiiiiii");
-        d3.selectAll("#bubbles svg").remove();
-        drawBubbles();
+  svg3.append("g")
+      .attr("class", "legendUn legend Un")
+      .attr("transform", "translate(20,20)")
+      .attr('opacity', 0);
+
+    svg.append('g')
+      .selectAll("path")
+      .data(topojson.feature(pa, pa.objects.hcv_data).features)
+      .enter().append("path")
+      .attr("d", path)
+      .attr("class", function(d) {
+        console.log(color7(d.properties.ELIGBUNT_P));
+        return "Un " + color7(d.properties.ELIGBUNT_P);
       })
-//Mouseover from https://bl.ocks.org/d3noob/257c360b3650b9f0a52dd8257d7a2d73
-      .on("mouseover", function(d){
-          d3.select(this)
-          .style("stroke","yellow")
-          .raise()
-          .style("stroke-width", "2px");
-          div.transition()
-            .duration(200)
-            .style("opacity", 1);
-          div.html(toolTipText(d))
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 28) + "px");
-        })
-      .on("mouseout", function(d){
-          d3.select(this).style("stroke","white")
-            .style("stroke-width", "1px");
-          div.transition()
-            .duration(500)
-            .style("opacity", 0);
-        });
+      .style("stroke", "white")
+      .style("stroke-width","1px")
+      .attr('opacity', 0);
+
 
 };
 
@@ -610,6 +617,7 @@ var toolTipText = function (a) {
     activateFunctions[4] = showELIGBUNT_HHT;
     activateFunctions[5] = showElection;
     activateFunctions[6] = showRURBAN;
+    activateFunctions[7] = showUnserved;
 
   };
 
@@ -875,6 +883,7 @@ var toolTipText = function (a) {
    * showRURBAN 
    *
    * hides: Election
+   * hides: Unserved
    * shows: RURBAN
    *
    */
@@ -900,8 +909,50 @@ var toolTipText = function (a) {
       .transition()
       .duration(750)
       .attr('opacity', 1);
+
+      d3.selectAll('.Un')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+     d3.selectAll(".legendUn")
+      .call(legend7)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
   }
 
+
+/**
+   * showUnserved 
+   *
+   * hides: Rurban
+   * shows: Unserved
+   *
+   */
+  function showUnserved() {
+    d3.selectAll('.Un')
+      .transition()
+      .duration(750)
+      .attr('opacity', 1);
+
+     d3.selectAll(".legendUn")
+      .call(legend7)
+      .transition()
+      .duration(750)
+      .attr('opacity', 1);
+
+    d3.selectAll('.RURBAN')
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
+     d3.selectAll(".legendRURBAN")
+      .call(legend6)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+  }
 
 /**
    * activate -
