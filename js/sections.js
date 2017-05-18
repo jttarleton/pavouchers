@@ -620,13 +620,13 @@ var scrollVis = function () {
           d3.select("#panel7").text("Margin of victory: "+Math.ceil((Math.abs(d.properties.MVICT)*100))+mVict(d.properties.MVICT));
           d3.select("#panel8").text(rUrban(d.properties.RURURB));
           d3.select("#panel9").text(Math.ceil(d.properties.ELIGBUNT_P*100)+"% of eligible population unserved");
+          //Draw Bubbles
+          served = +d.properties.HCV;
+          unserved = +d.properties.ELIG_B;
+          n = (served + unserved)*bubbleFactor;
+          d3.selectAll("#bubbles svg").remove();
+          drawBubbles();
         };
-        served = +d.properties.HCV;
-        unserved = +d.properties.ELIG_B;
-        n = (served + unserved)*bubbleFactor;
-        console.log("hiiiiiiiiii");
-        d3.selectAll("#bubbles svg").remove();
-        drawBubbles();
       });
 };
 
