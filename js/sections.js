@@ -20,7 +20,7 @@ var served = null,
 var node = null;
 
 var width2 = 960,
-    height2 = 500,
+    height2 = 300,
     padding = .75, // separation between same-color nodes
     clusterPadding = 1, // separation between different-color nodes
     maxRadius = 8,
@@ -607,6 +607,7 @@ var scrollVis = function () {
       })
         .on("click", function(d){
         d3.select("#countyname").text(d.properties.NAMELSAD);
+        d3.select(".instruction").style("background-color", "white");
         served = +d.properties.HCV;
         unserved = +d.properties.ELIG_B;
         n = (served + unserved)*bubbleFactor;
