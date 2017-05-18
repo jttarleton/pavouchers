@@ -45,8 +45,30 @@
 
 <div id='graphic'>
   <div id="header">
-    <div id="leftmargin"></div>
-    <div id="rightmargin"></div>
+    <div id="leftmargin">
+      <div id="countyPanel2">
+        <p id="panel1" class="legend">&nbsp;</p>
+        <p id="panel2" class="label2">&nbsp;</p>
+        <p id="panel3" class="label2">&nbsp;</p>
+        <p id="panel4" class="label2">&nbsp;</p>
+        <p id="panel5" class="label2">&nbsp;</p>
+        <p id="panel6" class="label2">&nbsp;</p>
+        <p id="panel7" class="label2">&nbsp;</p>
+        <p id="panel8" class="label2">&nbsp;</p>
+        <p id="panel9" class="label2">&nbsp;</p>
+        <svg style="width: 20px; height:20px">
+        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="lightgrey" /><p class="label2" style="display: inline">&nbsp;= ~ 100 served households</p>
+        </svg>
+        <svg style="width: 20px; height:20px">
+        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="#474747" /><p class="label2" style="display: inline">&nbsp;= ~ 100 unserved households</p>
+        </svg>
+
+      </div>
+    </div>
+    <div id="rightmargin">
+      <div id="countyPanel">
+      </div>
+    </div>
     <div>&nbsp;</div>
     <div id="vis"></div>
     <!-- <div id="countyname">&nbsp;</div> -->
@@ -75,10 +97,11 @@
         </div>
 
         <div class="space"></div>
+        <div class="space"></div>
 
         <div id='sections'>
           <section class="step" style="font-family: droid sans mono; font-size: 16px">
-          <p><span style="background-color: yellow">The Housing Choice Voucher program is the largest form of rental assistance for low-income families in the U.S. Despite its reputation as urban-focused, vouchers serve families in almost every county in Pennsylvania&mdash;rural and urban. But as with all forms of housing assistance, the need greatly exceeds supply.</span></p>
+          <p><span style="background-color: yellow">The Housing Choice Voucher program is the largest form of rental assistance for low-income families in the U.S. Despite its reputation as urban-focused, vouchers serve families in almost every county in Pennsylvania &mdash; rural and urban. But as with all forms of housing assistance, the need greatly exceeds supply.</span></p>
           <p><span style="background-color: yellow">Where do the unserved families live? How well is the need for vouchers met in each county?</span></p><br /><br />
 
 
@@ -86,14 +109,14 @@
           </section>
           <section class="step">
             <h2>The Burden</h2>
-            <p>Today, low income households across rural and urban Pennsylvania struggle with the cost of their rent or mortgage. The state sits at the crux of both national trends—rising rents in cities, a hangover from the 2008 financial crisis, stagnating or declining incomes—and local ones, among them rural price booms spurred by the influx of the shale drilling industry.</p>
+            <p>Today, low income households across rural and urban Pennsylvania struggle with the cost of their rent or mortgage. The state sits at the crux of both national trends &mdash; rising rents in cities, a hangover from the 2008 financial crisis, stagnating or declining incomes &mdash; and local ones, among them rural price booms spurred by the influx of the shale drilling industry.</p>
             
             <p>Regardless of where or why, more money spent on simple shelter means less for food, education, or savings for a rainy day. It also means greater vulnerability to bad breaks, when an illness or a factory closing could easily end in a family’s homelessness.</p>
           </section>
 
           <section class="step">
             <h2>The Vouchers</h2>
-            <p>Housing Choice Vouchers help relieve this cost burden by allowing households earning less than 50% of the Area Median Income —approximately $29,600 for a family of three—to pay 30% of their monthly income for a reasonably priced apartment on the private market. The federal government, by way of local housing authorities, pays the rest.</p>
+            <p>Housing Choice Vouchers help relieve this cost burden by allowing households earning less than 50% of the Area Median Income &mdash; approximately $29,600 for a family of three &mdash; to pay 30% of their monthly income for a reasonably priced apartment on the private market. The federal government, by way of local housing authorities, pays the rest.</p>
           
             <p>Vouchers are the largest form of federal housing rental assistance in the country, but the program is often considered a primarily urban one. More vouchers are concentrated in cities due to higher populations and generally higher need.</p>    
           </section>
@@ -105,7 +128,7 @@
           <section class="step">
             <p>Overall, the Housing Choice Voucher program makes housing affordable for over 78,000 households in Pennsylvania, serving over 176,500 people.</p>
 
-            <p>Still, that leaves over 700,000 households—approximately 1.5 million people—across the state that are very or extremely low income, housing cost burdened, and not receiving either a housing choice voucher or another of the two major forms of federal rental assistance. Almost 70,000, or around 10%, of those households live in rural counties. The federal government only funds the program enough to serve 21% of Pennsylvania families that need it, resulting in families waiting up to 10 years before they reach the top of the list or waiting years just to get on a list.<p>
+            <p>Still, that leaves over 700,000 households—approximately 1.5 million people &mdash; across the state that are very or extremely low income, housing cost burdened, and not receiving either a housing choice voucher or another of the two major forms of federal rental assistance. Almost 70,000, or around 10%, of those households live in rural counties. The federal government only funds the program enough to serve 21% of Pennsylvania families that need it, resulting in families waiting up to 10 years before they reach the top of the list or waiting years just to get on a list.<p>
 
             <p><i> Skip below to explore each county by the proportion of its served or unserved eligible households.</i></p>
           </section>
@@ -120,9 +143,8 @@
 
             <p>Rural areas depend on Housing Choice Vouchers just as cities do, and many rural counties sorely need more rental assistance for low-income households struggling to stay sheltered. As rhetoric turns into budgets, rural counties that went to Trump stand to lose the same deeply needed support that their urban counterparts will.</p>
           </section>
-          
-          <section class="step">
-            <p><b>Explore how many eligible and cost burdened Pennsylvanians are not receiving Housing Choice Vouchers across the state’s counties, whether those counties are mostly urban or mostly rural, and how they voted in 2016.</b></p>
+          <section class="step" style="font-family: droid sans mono; font-size: 16px">
+            <p><span style="background-color: yellow" class="instruction"> Explore how many eligible and cost burdened Pennsylvanians are not receiving Housing Choice Vouchers across the state’s counties, whether those counties are mostly urban or mostly rural, and how they voted in 2016.</span></p>
           </section>
           <section class="step">
           </section>
@@ -135,25 +157,15 @@
       <div class="button2 col-md-2" onclick="buttonClick()">BLUE</div>
     </div> -->
 
-    <div id="bubbles">
-    </div>
-
 
 
   </div> <!--END OF CONTAINER DIV -->
+  <div id="bubbleHolder">
+    <div id="bubbles">
+    </div>
+  </div>
 </div> <!--END OF GRAPHIC DIV -->
 
-          <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
 
-
-<!-- EXTRA CODE
-
--->
 </body>
 </html>

@@ -19,8 +19,8 @@ var served = null,
 
 var node = null;
 
-var width2 = 960,
-    height2 = 500,
+var width2 = 1200,
+    height2 = 800,
     padding = .75, // separation between same-color nodes
     clusterPadding = 1, // separation between different-color nodes
     maxRadius = 8,
@@ -35,7 +35,7 @@ var n = served + unserved, // total number of nodes
 var color = function (d) {
   console.log(d);
   if (d == 0) {
-    return "black";
+    return "#474747";
     }
   else {
     return "lightgrey";
@@ -125,7 +125,7 @@ function drawBubbles () {
   var force = d3.forceSimulation()
   
   // keep entire simulation balanced around screen center
-    .force('center', d3.forceCenter(width2/1.5, height2/2))
+    .force('center', d3.forceCenter(width2/1.5, height2/1.5))
 
   // cluster by section
     .force('cluster', cluster()
@@ -146,7 +146,7 @@ function drawBubbles () {
   var node = svg2.selectAll("circle")
     .data(nodes)
     .enter().append("circle")
-    .style("stroke", "#e6e6e6")
+    .style("stroke", "transparent")
     .style("fill", function(d) { return color(d.cluster/10); });
 
 
@@ -154,37 +154,37 @@ function drawBubbles () {
 
   var text1 = svg2.append("text")
     .text("served:")
-    .attr("x", 175)
-    .attr("y", 50);
+    .attr("x", 300)
+    .attr("y", height2-150);
 
   text1.append("tspan")
     .text(commaSeparateNumber(served))
     .attr("dy", "40px")
-    .attr("x", 175)
+    .attr("x", 300)
     .style("font-size", "50px")
     .style("font-weight", "900");
 
   text1.append("tspan")
     .text("households")
     .attr("dy", "20px")
-    .attr("x", 175);
+    .attr("x", 300);
 
   var text2 = svg2.append("text")
     .text("unserved:")
-    .attr("x", 650)
-    .attr("y", 50);
+    .attr("x", 750)
+    .attr("y", height2-150);
 
   text2.append("tspan")
     .text(commaSeparateNumber(unserved))
     .attr("dy", "40px")
-    .attr("x", 650)
+    .attr("x", 750)
     .style("font-size", "50px")
     .style("font-weight", "900");
 
   text2.append("tspan")
     .text("households")
     .attr("dy", "20px")
-    .attr("x", 650);
+    .attr("x", 750);
 
 
 
@@ -275,7 +275,7 @@ var scrollVis = function () {
       }));
 
     var color6 = d3.scaleOrdinal()
-      .domain(["Mostly or Completely Rural Counties", "Mostly Urban Counties"])
+      .domain(["Mostly or Completely Rural", "Mostly Urban"])
       .range(["#b2df8a", "#1f78b4"]);
 
     var color7 = d3.scaleThreshold()
@@ -607,12 +607,26 @@ var scrollVis = function () {
       })
         .on("click", function(d){
         d3.select("#countyname").text(d.properties.NAMELSAD);
-        served = +d.properties.HCV;
-        unserved = +d.properties.ELIG_B;
-        n = (served + unserved)*bubbleFactor;
-        console.log("hiiiiiiiiii");
-        d3.selectAll("#bubbles svg").remove();
-        drawBubbles();
+        if (d3.selectAll('.Un ').attr('opacity') > .5) {
+          d3.select(".instruction").style("background-color", "transparent");
+          //County panel
+          d3.select("#countyPanel2").style("visibility", "visible");
+          d3.select("#panel1").text(d.properties.NAMELSAD);
+          d3.select("#panel2").text("Population: "+commaSeparateNumber(d.properties.POP));
+          d3.select("#panel3").text(Math.ceil(100*d.properties.BRD_RENT_P)+"% of households rent burdened");
+          d3.select("#panel4").text(commaSeparateNumber(d.properties.HCV)+" vouchers");
+          d3.select("#panel5").text(Math.ceil(100*(d.properties.ELIGBUNT/d.properties.HH_T))+"% of county households that eligible and rent burdened but unserved");
+          d3.select("#panel6").text((d.properties.HCV_HH*100).toFixed(1)+" vouchers per 100 households");
+          d3.select("#panel7").text("Margin of victory: "+Math.ceil((Math.abs(d.properties.MVICT)*100))+mVict(d.properties.MVICT));
+          d3.select("#panel8").text(rUrban(d.properties.RURURB));
+          d3.select("#panel9").text(Math.ceil(d.properties.ELIGBUNT_P*100)+"% of eligible population unserved");
+          //Draw Bubbles
+          served = +d.properties.HCV;
+          unserved = +d.properties.ELIG_B;
+          n = (served + unserved)*bubbleFactor;
+          d3.selectAll("#bubbles svg").remove();
+          drawBubbles();
+        };
       });
 };
 
@@ -643,10 +657,10 @@ var toolTipText = function (a) {
     return a.properties.NAMELSAD;
   }
   if (d3.selectAll('.burden').attr('opacity') > .5) {
-    return (a.properties.NAMELSAD+("<br />")+commaSeparateNumber(Math.ceil(100*a.properties.BRD_RENT_P)))+"% of households rent burdened";
+    return (a.properties.NAMELSAD+("<br />")+Math.ceil(100*a.properties.BRD_RENT_P))+"% of households rent burdened";
   }
   if (d3.selectAll('.HCVCount').attr('opacity') > .5) {
-    return (a.properties.NAMELSAD+("<br />")+a.properties.HCV+" vouchers");
+    return (a.properties.NAMELSAD+("<br />")+commaSeparateNumber(a.properties.HCV)+" vouchers");
   }
   if (d3.selectAll('.HCVHH').attr('opacity') > .5) {
     return (a.properties.NAMELSAD+("<br />")+(a.properties.HCV_HH*100).toFixed(1)+" vouchers per 100 households");
