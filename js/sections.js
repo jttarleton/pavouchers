@@ -676,13 +676,14 @@ var toolTipText = function (a) {
     // activateFunctions are called each
     // time the active section changes
     activateFunctions[0] = showBlank;
-    activateFunctions[1] = showBurden;
-    activateFunctions[2] = showHCVCount;
-    activateFunctions[3] = showHCVHH;
-    activateFunctions[4] = showELIGBUNT_HHT;
-    activateFunctions[5] = showElection;
-    activateFunctions[6] = showRURBAN;
-    activateFunctions[7] = showUnserved;
+    activateFunctions[1] = showBlank;
+    activateFunctions[2] = showBurden;
+    activateFunctions[3] = showHCVCount;
+    activateFunctions[4] = showHCVHH;
+    activateFunctions[5] = showELIGBUNT_HHT;
+    activateFunctions[6] = showElection;
+    activateFunctions[7] = showRURBAN;
+    activateFunctions[8] = showUnserved;
 
   };
 
