@@ -30,10 +30,12 @@ d3.csv("data/states2.csv", function(error, states) {
     .enter()
     .append("td").append("svg")
       .attr("width", "100")
-      .attr("height", function(d) { return d[0] * 200; })
+      .attr("height", function(d) { return 10+(d[0] * 200); })
     .append("circle")
+      .style("fill", "#ffffff")
+      .style("stroke", "lightgrey")
       .attr("r", function(d) { return d[0] * 100; })
-      .attr("cy", function(d) { return d[0] * 100; })
+      .attr("cy", function(d) { return 5+(d[0] * 100); })
       .attr("cx", (function(d) {
         if (d[1] == "Young") {
           return 100-(d[0] * 100);
