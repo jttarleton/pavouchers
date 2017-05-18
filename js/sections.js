@@ -438,7 +438,7 @@ var scrollVis = function () {
     .attr('opacity', 0);
     
   svg3.append("g")
-    .attr("class", "legendBurden legend burden")
+    .attr("class", "legendBurden legend")
     .attr("transform", "translate(20,20)")
     .attr('opacity', 0);
     
@@ -456,7 +456,7 @@ var scrollVis = function () {
     .attr('opacity', 0);
 
   svg3.append("g")
-        .attr("class", "legendHCVCount legend HCVCount")
+        .attr("class", "legendHCVCount legend")
         .attr("transform", "translate(20,20)")
         .attr('opacity', 0);
 
@@ -478,7 +478,7 @@ var scrollVis = function () {
 
 
     svg3.append("g")
-        .attr("class", "legendHCVHH legend HCVHH")
+        .attr("class", "legendHCVHH legend")
         .attr("transform", "translate(20,20)")
         .attr('opacity', 0);
 
@@ -509,7 +509,7 @@ var scrollVis = function () {
       .attr('opacity', 0);
 
     svg3.append("g")
-      .attr("class", "legendELIGBUNT_HHT legend ELIGBUNT_HHT")
+      .attr("class", "legendELIGBUNT_HHT legend")
       .attr("transform", "translate(20,20)")
       .attr('opacity', 0);
 
@@ -528,13 +528,13 @@ var scrollVis = function () {
       .attr('opacity', 0);
 
     svg3.append("g")
-      .attr("class", "legendMVICT legend MVICT")
+      .attr("class", "legendMVICT legend")
       .attr("transform", "translate(20,20)")
       .attr('opacity', 0);
 
 
     svg3.append("g")
-      .attr("class", "legendRURBAN legend RURBAN")
+      .attr("class", "legendRURBAN legend")
       .attr("transform", "translate(20,20)")
       .attr('opacity', 0);
 
@@ -558,7 +558,7 @@ var scrollVis = function () {
       .attr('opacity', 0);
 
   svg3.append("g")
-      .attr("class", "legendUn legend Un")
+      .attr("class", "legendUn legend")
       .attr("transform", "translate(20,20)")
       .attr('opacity', 0);
 
@@ -718,6 +718,12 @@ var toolTipText = function (a) {
       .duration(750)
       .attr('opacity', 0);
 
+    d3.selectAll(".legendBurden")
+      .call(legend1)
+      .transition()
+      .duration(750)
+      .attr('opacity', 0);
+
     d3.selectAll('.blank')
       .transition()
       .duration(0)
@@ -741,7 +747,7 @@ var toolTipText = function (a) {
   function showBurden() {
     d3.selectAll('.blank')
       .transition()
-      .duration(2000)
+      .duration(750)
       .attr('opacity', 0);
 
     d3.selectAll('.HCVCount')
@@ -763,8 +769,7 @@ var toolTipText = function (a) {
     d3.selectAll(".legendBurden")
       .call(legend1)
       .transition()
-      .delay(10000)
-      .duration(750)
+      .duration(2000)
       .attr('opacity', 1.0);
 
   }
@@ -786,7 +791,7 @@ var toolTipText = function (a) {
     d3.selectAll(".legendBurden")
       .call(legend1)
       .transition()
-      .duration(500)
+      .duration(750)
       .attr('opacity', 0);
 
     d3.selectAll('.HCVCount')
@@ -797,7 +802,7 @@ var toolTipText = function (a) {
     d3.selectAll(".legendHCVCount")
       .call(legend2)
       .transition()
-      .duration(750)
+      .duration(1500)
       .attr('opacity', 1.0);
 
     d3.selectAll('.HCVHH')
@@ -833,7 +838,7 @@ var toolTipText = function (a) {
      d3.selectAll(".legendHCVHH")
       .call(legend3)
       .transition()
-      .duration(750)
+      .duration(1500)
       .attr('opacity', 1.0);
 
     d3.selectAll('.HCVCount')
@@ -887,7 +892,7 @@ var toolTipText = function (a) {
      d3.selectAll(".legendELIGBUNT_HHT")
       .call(legend4)
       .transition()
-      .duration(750)
+      .duration(1500)
       .attr('opacity', 1.0);
 
        d3.selectAll('.MVICT')
@@ -919,7 +924,7 @@ var toolTipText = function (a) {
      d3.selectAll(".legendMVICT")
       .call(legend5)
       .transition()
-      .duration(750)
+      .duration(2000)
       .attr('opacity', 1);
 
     d3.selectAll('.ELIGBUNT_HHT')
@@ -973,7 +978,7 @@ var toolTipText = function (a) {
      d3.selectAll(".legendRURBAN")
       .call(legend6)
       .transition()
-      .duration(750)
+      .duration(2000)
       .attr('opacity', 1);
 
       d3.selectAll('.Un')
@@ -1005,7 +1010,7 @@ var toolTipText = function (a) {
      d3.selectAll(".legendUn")
       .call(legend7)
       .transition()
-      .duration(750)
+      .duration(2000)
       .attr('opacity', 1);
 
     d3.selectAll('.RURBAN')
