@@ -154,20 +154,20 @@ function drawBubbles () {
 
   var text1 = svg2.append("text")
     .text("served:")
-    .attr("x", 275)
+    .attr("x", 300)
     .attr("y", height2-150);
 
   text1.append("tspan")
     .text(commaSeparateNumber(served))
     .attr("dy", "40px")
-    .attr("x", 275)
+    .attr("x", 300)
     .style("font-size", "50px")
     .style("font-weight", "900");
 
   text1.append("tspan")
     .text("households")
     .attr("dy", "20px")
-    .attr("x", 275);
+    .attr("x", 300);
 
   var text2 = svg2.append("text")
     .text("unserved:")
