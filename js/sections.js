@@ -471,19 +471,10 @@ var scrollVis = function () {
       return "HCVCount " + color2(d.properties.HCV);
     })
     .style("stroke", "white")
-    .style("stroke-width","1px")
+    .style("stroke-width","1px");
     /*.style("fill", function(d) {
     return color2(d.properties.HCV);
     })*/
-    .on("click", function(d){
-      d3.select("#countyname").text(d.properties.NAMELSAD);
-      served = +d.properties.HCV;
-      unserved = +d.properties.ELIG_B;
-      n = (served + unserved)*bubbleFactor;
-      console.log("hiiiiiiiiii");
-      d3.selectAll("#bubbles svg").remove();
-      drawBubbles();
-    });
 
 
     svg3.append("g")
@@ -583,8 +574,67 @@ var scrollVis = function () {
       .style("stroke", "white")
       .style("stroke-width","1px")
       .attr('opacity', 0);
+      
+//Mouseover from https://bl.ocks.org/d3noob/257c360b3650b9f0a52dd8257d7a2d73
+
+    svg.append('g')
+      .selectAll("path")
+        .data(topojson.feature(pa, pa.objects.hcv_data).features)
+        .enter().append("path")
+        .attr("d", path)
+        .style("stroke", "transparent")
+        .style("stroke-width","1px")
+        .style("fill", "transparent")
+        .attr('opacity', 1)
+      .on("mouseover", function(d){
+          d3.select(this)
+          .style("stroke","yellow")
+          .raise()
+          .style("stroke-width", "2px");
+          div.transition()
+            .duration(200)
+            .style("opacity", 1);
+          div.html(toolTipText(d))
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 28) + "px");
+        })
+      .on("mouseout", function(d){
+          d3.select(this).style("stroke","transparent")
+            .style("stroke-width", "1px");
+          div.transition()
+            .duration(500)
+            .style("opacity", 0);
+      })
+        .on("click", function(d){
+        d3.select("#countyname").text(d.properties.NAMELSAD);
+        served = +d.properties.HCV;
+        unserved = +d.properties.ELIG_B;
+        n = (served + unserved)*bubbleFactor;
+        console.log("hiiiiiiiiii");
+        d3.selectAll("#bubbles svg").remove();
+        drawBubbles();
+      });
+};
 
 
+
+
+function mVict (d) {
+  if (d < 0) {
+      return "% (Clinton)";
+    }
+    if (d > 0) {
+      return "% (Trump)";
+    }
+};
+
+function rUrban (d) {
+  if (d == "R") {
+    return "Mostly or completely rural";
+  }
+  if (d == "U") {
+    return "Mostly urban";
+  }
 };
 
 
@@ -593,10 +643,22 @@ var toolTipText = function (a) {
     return a.properties.NAMELSAD;
   }
   if (d3.selectAll('.burden').attr('opacity') > .5) {
-    return (a.properties.NAMELSAD+("<br />")+commaSeparateNumber(a.properties.ELIG_B));
+    return (a.properties.NAMELSAD+("<br />")+commaSeparateNumber(Math.ceil(100*a.properties.BRD_RENT_P)))+"% of households rent burdened";
   }
   if (d3.selectAll('.HCVCount').attr('opacity') > .5) {
-    return "HCV";
+    return (a.properties.NAMELSAD+("<br />")+a.properties.HCV+" vouchers");
+  }
+  if (d3.selectAll('.HCVHH').attr('opacity') > .5) {
+    return (a.properties.NAMELSAD+("<br />")+a.properties.HCV_HH*100+" vouchers per 100 households");
+  }
+  if (d3.selectAll('.ELIGBUNT_HHT').attr('opacity') > .5) {
+    return (a.properties.NAMELSAD+("<br />")+Math.ceil(100*(a.properties.ELIGBUNT/a.properties.HH_T))+"% of county households that eligible<br />and rent burdened but unserved");
+  }
+  if (d3.selectAll('.MVICT').attr('opacity') > .5) {
+    return (a.properties.NAMELSAD+("<br />")+Math.ceil((Math.abs(a.properties.MVICT)*100))+mVict(a.properties.MVICT));
+  }
+  if (d3.selectAll('.RURBAN').attr('opacity') > .5) {
+    return (a.properties.NAMELSAD+("<br />")+rUrban(a.properties.RURURB));
   }
 };
 
