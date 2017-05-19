@@ -291,7 +291,7 @@ var scrollVis = function () {
       .labels(["Less than 45%", "45% to 50%", "50% to 55%", "55% to 60%", "60% to 65%", "More than 65%"])
       .useClass(true)
       .scale(color1)
-      .title("% of Renting Households that are Cost Burdened")
+      .title("% of Renter Households that are Rent Burdened")
       .titleWidth(200);
     
 
@@ -316,7 +316,7 @@ var scrollVis = function () {
       .labels(d3.legendHelpers.thresholdLabels)
       .useClass(true)
       .scale(color4)
-      .title("% of Households that are Eligible for Vouchers & Housing Cost Burdened But Unserved")
+      .title("% of County Households that are Eligible But Unserved")
       .titleWidth(200)
       .labels(["Less than 10%", "10% to 15%", "15% to 20%", "More than 20%"]);
 
