@@ -35,7 +35,7 @@ var n = served + unserved, // total number of nodes
 var color = function (d) {
   console.log(d);
   if (d == 0) {
-    return "#474747";
+    return "#5e5e5e";
     }
   else {
     return "lightgrey";
@@ -133,7 +133,7 @@ function drawBubbles () {
 
   // apply collision with padding
     .force('collide', d3.forceCollide(d => d.radius + padding)
-      .strength(1))
+      .strength(.75))
 
     .on('tick', layoutTick)
     .nodes(nodes);
@@ -276,7 +276,8 @@ var scrollVis = function () {
 
     var color6 = d3.scaleOrdinal()
       .domain(["Mostly or Completely Rural", "Mostly Urban"])
-      .range(["#b2df8a", "#1f78b4"]);
+      /*.range(["#b2df8a", "#1f78b4"]);*/
+      .range(["#bae4bc","#43a2ca"]);
 
     var color7 = d3.scaleThreshold()
       .domain([0.7, 0.75, 0.8, 0.85, 0.9])
@@ -611,7 +612,14 @@ var scrollVis = function () {
           d3.select(".instruction").style("background-color", "transparent");
           //County panel
           d3.select("#countyPanel2").style("visibility", "visible");
-          d3.select("#panel1").text(d.properties.NAMELSAD);
+          //Draw Bubbles
+          served = +d.properties.HCV;
+          unserved = +d.properties.ELIG_B;
+          n = (served + unserved)*bubbleFactor;
+          d3.selectAll("#bubbles svg").remove();
+          drawBubbles();
+        };
+        d3.select("#panel1").text(d.properties.NAMELSAD);
           d3.select("#panel2").text("Population: "+commaSeparateNumber(d.properties.POP));
           d3.select("#panel3").text(Math.ceil(100*d.properties.BRD_RENT_P)+"% of households rent burdened");
           d3.select("#panel4").text(commaSeparateNumber(d.properties.HCV)+" vouchers");
@@ -620,13 +628,6 @@ var scrollVis = function () {
           d3.select("#panel7").text("Margin of victory: "+Math.ceil((Math.abs(d.properties.MVICT)*100))+mVict(d.properties.MVICT));
           d3.select("#panel8").text(rUrban(d.properties.RURURB));
           d3.select("#panel9").text(Math.ceil(d.properties.ELIGBUNT_P*100)+"% of eligible population unserved");
-          //Draw Bubbles
-          served = +d.properties.HCV;
-          unserved = +d.properties.ELIG_B;
-          n = (served + unserved)*bubbleFactor;
-          d3.selectAll("#bubbles svg").remove();
-          drawBubbles();
-        };
       });
 };
 
