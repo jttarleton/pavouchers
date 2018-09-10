@@ -24,12 +24,27 @@ a:active {
   color: #000000;
 }
 
+#title {
+  z-index: 3;
+  position:relative;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-family: 'droid sans mono', monospace;
+  text-align: center;
+}
+
+.source {
+  font-family: 'droid sans mono', monospace;
+  font-size: 12px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
 
 /* ----- Header and Map Area -----*/
 
-.legendContainer {
-  height: auto;
-}
 #header {
     position: fixed;
     text-align:center;
@@ -48,44 +63,34 @@ a:active {
   padding-left: 0px;
   height: 400px;
   padding-top: 75px;
-  /*border: solid 1px red;*/
 }
 
-#rightmargin {
-  position: fixed;
-  text-align:left;
-  margin: 0;
-  width:200px;
-  z-index: 2;
-  padding-left: 0px;
+#methodology {
+  width: 200px;
   height: auto;
-  padding-top: 75px;
-  /*border: solid 1px blue;*/
-  top: 0px;
-  right: 5px;
+  position: fixed;
+  margin-left:20px;
+  padding-top:25px;
+  font-weight: normal;
+  color: darkgrey;
+  z-index: 3;
 }
 
 #vis {
-    width:600px;
+    width: 600px;
+    height: 300px;
     margin: 0 auto;
     padding-top: 0px;
 }
 
-/*#vis .title {
-  font-size:120px;
-  text-anchor: middle;
-}*/
 
-#title {
-  z-index: 3;
-  position:relative;
-  text-align: center;
+.counties {
+  fill: #ccc;
+  stroke: #fff;
 }
 
-.subtitle {
-  font-size: 12px;
-  font-family: 'droid sans mono', monospace;
-  text-align: center;
+.space {
+    height:50px;
 }
 
 div.tooltip {
@@ -101,25 +106,6 @@ div.tooltip {
   pointer-events: none;
 }
 
-
-#countyname {
-  position:relative;
-  font-size: 20px;
-  height: 20px;
-  padding-top: 9px;
-  text-align:center;
-}
-
-.space {
-    height:50px;
-}
-
-.affix {
-    position:fixed;
-    margin:auto;
-    top: 0;
-}
-
 .legend {
   font-family: 'droid sans mono';
   font-size: 14px;
@@ -128,34 +114,9 @@ div.tooltip {
 .label2 {
   font-family: 'droid sans mono';
   font-size: 10.5px;
-  font-weight: bold;
+  font-weight: normal;
   /*margin-left:25px;*/
-  color: lightgrey;
-}
-
-/*.counties :hover {
-  fill: red;
-}*/
-
-.county-borders {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 0.5px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
-}
-
-/*#header {
-  z-index: 100 !important;
-}*/
-
-#sections {
-  /*position: relative;
-  display: inline-block;
-  width: 1000px;
-  top: 180px;
-  z-index: 0;*/
+  color: darkgrey;
 }
 
 #countyPanel2 {
@@ -165,91 +126,11 @@ div.tooltip {
   position: fixed;
   margin-left:20px;
   padding-top:250px;
-}
-
-/*.step {
-  margin-bottom: 100px;
-}
-
-
-/* ----- D3 Styling ----- */
-
-.states {
-    fill: none;
-    stroke: #fff;
-    stroke-linejoin: round;
-}
-
-/* ----- Bubbles ----- */
-circle {
-  stroke: #fff;
-}
-
-#bubbles {
-  /*border: solid 2px blue;*/
-  display: block;
-  text-align: center;
-  height: 100vh;
-  z-index: -1;
-  position: absolute;
-  left:0;
-  bottom: 0;
-  width:100%;
-
-}
-
-#bubbleHolder {
-  height:325px;
-  /*background-color: yellow;*/
-  position:relative;
-}
-
-/* ----- Table ----- */
-
-.button1 {
-  border: 1px solid red;
-  height: 25px;
-  text-align: center;
-}
-
-.button2 {
-  border: 1px solid blue;
-  height: 25px;
-  text-align: center;
-}
-
-
-table {
-  border-collapse: collapse;
-  font: 10px sans-serif;
-  /*width: 720px;*/
-}
-
-td {
-  padding: 0;
-}
-
-th {
   font-weight: normal;
-  text-align: right;
-  min-width: 43px;
 }
 
-thead td {
-  cursor: s-resize;
-  padding: 0;
-}
 
-tbody tr:first-child td {
-  /*padding-top: 2px;*/
-  padding-right: 0px;
-}
-
-tbody td {
-  padding: 0;
-  border-left: dotted 1px grey;
-}
-
+/* ----- COLOR INFO ----- */
 
 /* ---- Cost Burden Map ------*/
 
@@ -262,14 +143,14 @@ tbody td {
 
 /* ----- HCV Count ------*/
 
-.b0-9{fill:rgb(255,247,251)} 
-.b1-9{fill:rgb(236,231,242)} 
-.b2-9{fill:rgb(208,209,230)} 
-.b3-9{fill:rgb(166,189,219)} 
-.b4-9{fill:rgb(116,169,207)} 
-.b5-9{fill:rgb(54,144,192)} 
-.b6-9{fill:rgb(5,112,176)} 
-.b7-9{fill:rgb(4,90,141)} 
+.b0-9{fill:rgb(255,247,251)}
+.b1-9{fill:rgb(236,231,242)}
+.b2-9{fill:rgb(208,209,230)}
+.b3-9{fill:rgb(166,189,219)}
+.b4-9{fill:rgb(116,169,207)}
+.b5-9{fill:rgb(54,144,192)}
+.b6-9{fill:rgb(5,112,176)}
+.b7-9{fill:rgb(4,90,141)}
 .b8-9{fill:rgb(2,56,88)}
 
 /* ------ HCV per HH --------*/
@@ -307,3 +188,33 @@ tbody td {
 .f3-6{fill:rgb(150,150,150)}
 .f4-6{fill:rgb(99,99,99)}
 .f5-6{fill:rgb(37,37,37)}
+
+
+
+
+
+
+
+/* ----- BUBBLES ----- */
+circle {
+  stroke: #fff;
+}
+
+#bubbles {
+  /*border: solid 2px blue;*/
+  display: block;
+  text-align: center;
+  height: 100vh;
+  z-index: -1;
+  position: absolute;
+  left:0;
+  bottom: 0;
+  width:100%;
+
+}
+
+#bubbleHolder {
+  height:325px;
+  /*background-color: yellow;*/
+  position:relative;
+}

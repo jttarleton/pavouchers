@@ -4,175 +4,167 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
-<!-- Add Google Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i rel='stylesheet' type='text/css'>
+<!-- GOOGLE FONTS -->
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,800,900' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel="stylesheet" type='text/css'>
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" type='text/css'>
-	<title>Vouchers and Votes</title>
+	<link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel="stylesheet" type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" type='text/css'>
 
-<!-- JS Scripts -->
-  <script src="lib/d3.js"></script>
-  <script src="lib/d3-legend.js"></script>
-  <script src="js/scroller.js"></script>
-  <script src="js/sections.js"></script>
-  <script src="js/table.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-<!-- D3 Scripts -->
-	<script src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="https://d3js.org/d3-array.v1.min.js"></script>
+  	<title>Vouchers and Votes</title>
+<!-- SCRIPTS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="lib/d3.js"></script>
+	<script src="lib/d3-legend.js"></script>
+  	<script src="https://d3js.org/d3.v4.min.js"></script>
+  	<script src="https://d3js.org/d3-color.v1.min.js"></script>
+  	<script src="https://d3js.org/d3-array.v1.min.js"></script>
 	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/topojson.v2.min.js"></script>
-  <script src="https://d3js.org/d3-color.v1.min.js"></script>
-  <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
-  <script src="https://d3js.org/d3-ease.v1.min.js"></script>
-  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-  <script src="https://d3js.org/d3-selection.v1.min.js"></script>
-  <script src="https://d3js.org/d3-timer.v1.min.js"></script>
-  <script src="https://d3js.org/d3-transition.v1.min.js"></script>
+	<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+  	<script src="https://d3js.org/d3-ease.v1.min.js"></script>
+  	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+ 	<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+  	<script src="https://d3js.org/d3-timer.v1.min.js"></script>
+  	<script src="https://d3js.org/d3-transition.v1.min.js"></script>
+  	<script src="https://d3js.org/d3-collection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-request.v1.min.js"></script>
+
+	<!-- <script src="js2/colors.js"></script>
+	<script src="js2/legends.js"></script>
+	<script src="js/scroller.js"></script>
+	<script src="js/show.js"></script>
+	<script src="js/legends.js"></script>
+	<script src="js/colors.js"></script>
+	<script src="js/bubbles.js"></script>
+	<script src="js/mouse.js"></script>
+	<script src="js2/setupsections.js"></script>
+	<script src="js2/scrollvis.js"></script>
+	<script src="js2/scrollvis2.js"></script>
+	<script src="js2/scroller.js"></script>
+	<script src="js2/display.js"></script> -->
 
 
 </head>
 
-
 <body>
+	<div id='graphic'> <!-- START OF GRAPHIC -->
+		<div id="methodology">&#9432; <a href="methodology.html">Methodology</a></div><br><br>
+		<div id="header">
+		    <div id="leftmargin">
+      			<div id="countyPanel2">
+			        <p id="panel1" class="legend">&nbsp;</p>
+			        <p id="panel2" class="label2">&nbsp;</p>
+			        <p id="panel3" class="label2">&nbsp;</p>
+			        <p id="panel4" class="label2">&nbsp;</p>
+			        <p id="panel5" class="label2">&nbsp;</p>
+			        <p id="panel6" class="label2">&nbsp;</p>
+			        <p id="panel7" class="label2">&nbsp;</p>
+			        <p id="panel8" class="label2">&nbsp;</p>
+			        <p id="panel9" class="label2">&nbsp;</p>
+			        <svg style="width: 20px; height:20px">
+			        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="lightgrey" /><p class="label2" style="display: inline">&nbsp;= ~ 100 served households</p>
+			        </svg>
+			        <svg style="width: 20px; height:20px">
+			        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="#474747" /><p class="label2" style="display: inline">&nbsp;= ~ 100 unserved households</p>
+			        </svg>
+      			</div>
+		    </div>
+		    <div>&nbsp;</div> <!-- $remove -->
+		    <div id="vis">
+		    </div>
+		</div>
 
-<div id='graphic'>
-  <div id="header">
-    <div id="leftmargin">
-      <div id="countyPanel2">
-        <p id="panel1" class="legend">&nbsp;</p>
-        <p id="panel2" class="label2">&nbsp;</p>
-        <p id="panel3" class="label2">&nbsp;</p>
-        <p id="panel4" class="label2">&nbsp;</p>
-        <p id="panel5" class="label2">&nbsp;</p>
-        <p id="panel6" class="label2">&nbsp;</p>
-        <p id="panel7" class="label2">&nbsp;</p>
-        <p id="panel8" class="label2">&nbsp;</p>
-        <p id="panel9" class="label2">&nbsp;</p>
-        <svg style="width: 20px; height:20px">
-        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="lightgrey" /><p class="label2" style="display: inline">&nbsp;= ~ 100 served households</p>
-        </svg>
-        <svg style="width: 20px; height:20px">
-        <circle r="8px" cx="8px" cy="10px" stroke="black" stroke-width="2" fill="#474747" /><p class="label2" style="display: inline">&nbsp;= ~ 100 unserved households</p>
-        </svg>
+	 	<div class="container"> <!-- START OF CONTAINER -->
 
-      </div>
-    </div>
-    <div id="rightmargin">
-      <div id="countyPanel">
-      </div>
-    </div>
-    <div>&nbsp;</div>
-    <div id="vis"></div>
-    <!-- <div id="countyname">&nbsp;</div> -->
-  </div>
-  <div class="container">
+	 		<br> <!-- $remove -->
 
-    <br>
+		 	<div class="row">
+		    	<div class="col-md-8 col-md-offset-2">
 
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        
-        <div id="sections">
-          <section>
-            <br />
-            <br />
-            <br />
-            <br />
-            <h1 id="title">Vouchers and Votes<br/>in the Keystone State</h1>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p class="subtitle">By Zach Postone and Jonathan Tarleton</p>
-          </section>
-        </div>
-
-        <div class="space"></div>
-        <div class="space"></div>
-
-        <div id='sections'>
-          <section class="step" style="font-family: droid sans mono; font-size: 16px">
-          <p><span style="background-color: yellow">The Housing Choice Voucher program is the largest form of rental assistance for low-income families in the U.S. Despite its reputation as urban-focused, vouchers serve families in almost every county in Pennsylvania &mdash; rural and urban. But as with all forms of housing assistance, the need greatly exceeds supply.</span></p>
-          <p><span style="background-color: yellow">Where do the unserved families live? How well is the need for vouchers met in each county?</span></p><br /><br />
+			      	<div id="sections">
+			      		<section>
+					    	<br /> <!-- $remove -->
+				            <br />
+				            <br />
+				            <br />
+					      	<h1 id="title">Vouchers and Votes<br/>in the Keystone State</h1>
+					      	<br /> <!-- $remove -->
+				            <br />
+				            <br />
+				            <br />
+				            <br />
+					      	<p class="subtitle">By Zach Postone and Jonathan Tarleton<br>June 2017<br /></p>
+					    </section>
 
 
+					<div class="space"></div> <!-- $remove -->
+        			<div class="space"></div> <!-- $remove -->
 
-          </section>
-          <section class="step">
-            <h2>The Burden</h2>
-            <p>Today, low-income households across rural and urban Pennsylvania struggle with the cost of housing. The state sits at the crux of national and local trends, including rising rents in cities and rural price booms spurred by the shale drilling industry.</p>
-            
-            <p>More money spent on simple shelter means less for food, education, or savings for a rainy day. It also means greater vulnerability to bad breaks, when an illness or a factory closing could easily end in a family’s homelessness.</p>
-          </section>
 
-          <section class="step">
-            <h2>The Vouchers</h2>
+				      	<section class="step" style="font-family: droid sans mono; font-size: 16px">
+			          		<p><span style="background-color: yellow">The Housing Choice Voucher program is the largest form of rental assistance for low-income families in the U.S. Despite its reputation as urban-focused, vouchers serve families in almost every county in Pennsylvania&mdash;rural and urban. But as with all forms of housing assistance, the need greatly exceeds supply.</span></p>
+			          		<p><span style="background-color: yellow">Where do the unserved families live? How well is the need for vouchers met in each county?</span></p>
 
-            <p>Housing Choice Vouchers are an important tool for relieving this burden. Vouchers allow households earning less than 50% of the Area Median Income (approximately $29,600 for a family of three in Pennsylvania) to pay 30% of their monthly income for a reasonably priced apartment on the private market. The federal government, by way of local housing authorities, pays the rest. In Pennsylvania, the program makes housing affordable for over 176,500 people in 78,000 households. The program is often considered a primarily urban one. More vouchers are concentrated in cities due to their larger populations.</p>    
-          </section>
+			          		<br /><br /> <!-- $remove -->
 
-          <section class="step">
-            <p>But vouchers are used in almost every county of Pennsylvania. Many rural counties receive as many or more vouchers in proportion to the total number of families living there.</p>
+			          	</section>
+			          	<section class="step">
+				            <h2>High housing costs are a burden to families across Pennsylvania.</h2>
+				            <p>Today, low-income households across rural and urban Pennsylvania struggle with the cost of housing. The state sits at the crux of national and local trends, including rising rents in cities and rural price booms spurred by the shale drilling industry.</p>
+				            <p>More money spent on simple shelter means less for food, education, or savings for a rainy day. It also means greater vulnerability to bad breaks, when an illness or a factory closing could end in a family’s homelessness.</p>
+			          	</section>
+			          	<section class="step">
+				            <h2>Vouchers are a key part of making housing attainable for more people.</h2>
+				            <p>Housing Choice Vouchers are an important tool for relieving this burden. Vouchers allow households earning less than 50% of the Area Median Income (approximately $29,600 for a family of three in Pennsylvania) to pay 30% of their monthly income for a reasonably priced apartment on the private market. The federal government, by way of local housing authorities, pays the rest. In Pennsylvania, the program makes housing affordable for over 176,500 people in 78,000 households.</p>
+			        	</section>
+			        	<section class="step">
+			            	<h2>Rural communities depend on vouchers, too.</h2>
+			            	<p>The program is often considered a primarily urban one. More vouchers are concentrated in cities due to their larger populations. But vouchers are used in almost every county of Pennsylvania. Many rural counties receive as many or more vouchers in proportion to the total number of families living there. Potter and Fulton counties, both predominantly rural, rival Philadelphia in how many vouchers they receive relative to their total households.</p>
+			          	</section>
 
-            <p>Potter and Fulton counties, both predominantly rural, rival Philadelphia in how many vouchers they receive relative to their total households.</p>
-          </section>
+			          	<section class="step">
+			            	<p>The voucher program’s service of both rural and urban areas contradict popular narratives explaining a supposedly deep divide between rural and urban America&mdash;a divide used to explain Donald Trump’s rise to the presidency. Part of that divide is said to stem from government programs that fail to address the needs of voters outside metropolitan areas. Yet across the state, all counties have extremely high proportions of households that are eligible for vouchers but remain unserved. Counties that went to Trump stand to lose the same deeply needed support that urban areas would under the administration's housing agenda.</p>
+			          	</section>
 
-          <section class="step">
-            <p>Still, that leaves over 700,000 households across the state &mdash; approximately 1.5 million people &mdash; that are eligible and not receiving either a voucher or federal rental assistance through public housing or project-based Section 8 housing. Federal funding only serves 21% of Pennsylvania families that need a voucher. Wait lists for receiving a voucher can stretch for up to 10 years. And that's if you can even get a spot on a wait list; many remain closed to new additions for years at a time.<p>
-          </section>
+			        	<section class="step">
+			            	<h2>A crucial housing program for low-income renters appears to be threatened under the new administration.</h2>
+			            	<p>Pennsylvania's unexpected turn toward Donald Trump helped marshal in a new era of uncertainty for federal housing policy. While Housing Choice Vouchers have long enjoyed bipartisan support, both Trump and HUD Secretary Ben Carson have railed against federal aid for low-income communities and proposed dramatic cuts to housing programs. The most recent federal budget failed to sustain funding for the current number of vouchers. Authorities across the country have closed their voucher waiting lists and even revoked vouchers in anticipation of decreased funding.</p>
+			          	</section>
+			          	<section class="step">
+			            	<h2>Existing Housing Choice Vouchers can’t meet the high need for housing assistance across Pennsylvania.</h2>
+			            	<p>Even if the current voucher stock is maintained, that still leaves over 700,000 households across the state&mdash;approximately 1.5 million people&mdash;that are eligible and not receiving either a voucher or federal rental assistance through public housing or project-based Section 8 housing. Federal funding only serves 21% of Pennsylvania families that need a voucher. Wait lists for receiving a voucher can stretch for up to 10 years. And that's if you can even get a spot on a list; many remain closed to new additions for years at a time.</p>
+			            </section>
+			          	<section class="step" style="font-family: droid sans mono; font-size: 16px">
+			            	<p><span style="background-color: yellow" class="instruction">Click any county to explore the balance of served and unserved eligible households. (Best viewed on a standard computer screen.)<br><br>Where do the unserved families live? How well is the need for vouchers met in each county? How many vouchers could be put to use where you live and work to provide stable housing for your neighbors?
+</span></p>
+			            </section>
 
-          <section class="step">
-            <h2>The Divide</h2>
-            <p>Pennsylvania's unexpected turn toward Donald Trump helped marshal in a new era of uncertainty for federal housing policy. While Housing Choice Vouchers have long enjoyed bipartisan support, both Trump and HUD Secretary Ben Carson have railed against federal aid for low-income communities and proposed dramatic cuts to housing programs. The most recent federal budget failed to sustain funding for the current number of vouchers. Authorities across the country have closed their voucher waiting lists and even revoked vouchers in anticipation of decreased funding.</p>     
-          </section>
-          
-          <section class="step">
-            <p>Popular narratives explaining Trump's rise to the presidency often cite a deep divide between rural and urban America. Part of that divide is said to stem from government programs that fail to address the needs of voters outside metropolitan areas.</p>
+			            <section class="step">
+			            </section>
 
-            <P>Many rural counties across Pennsylvania are similarly served by the voucher program as urban centers. Yet across the state, all counties have extremely high proportions of households that are eligible for vouchers but remain unserved. Counties that went to Trump stand to lose the same deeply needed support that urban areas would under the administration's housing agenda.</p>
-          </section>
-          <section class="step" style="font-family: droid sans mono; font-size: 16px">
-            <p><span style="background-color: yellow" class="instruction"> Explore how many eligible and cost burdened Pennsylvanians are not receiving Housing Choice Vouchers (or other direct rental assistance) across the state’s counties.</span></p>
-          </section>
-          <section class="step">
-          </section>
-        </div> <!--END OF SECTIONS DIV -->
-      </div> <!--END OF COLUMN DIV -->
-    </div> <!--END OF ROW DIV -->
+					</div> <!-- END OF SECTIONS -->
+		    	</div> <!-- END OF COL -->
+		    </div> <!-- END OF ROW -->
+		</div> <!-- END OF CONTAINER -->
 
-    <!-- <div class="row">
-      <div class="button1 col-md-2 col-md-offset-4">RED</div>
-      <div class="button2 col-md-2" onclick="buttonClick()">BLUE</div>
-    </div> -->
+  		<div id="bubbleHolder">
+    		<div id="bubbles">
+    		</div>
+  		</div>
 
- <div class="space"></div>
- <div class="space"></div>
- <div class="space"></div>
- <div class="space"></div>
- <div class="space"></div>
 
-<div class="space"></div>
- <div class="space"></div>
- <div class="space"></div>
+	</div> <!-- END OF GRAPHIC -->
 
-  </div> <!--END OF CONTAINER DIV -->
-  <div id="bubbleHolder">
-    <div id="bubbles">
-    </div>
-  </div>
-</div> <!--END OF GRAPHIC DIV -->
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="js2/complete.js"></script>
 
 </body>
 </html>
-
-<!-- Around 10% of those households live in rural counties.-->

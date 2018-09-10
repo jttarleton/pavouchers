@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+<!-- GOOGLE FONTS -->
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,800,900' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel="stylesheet" type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" type='text/css'>
+
+  	<title>Vouchers and Votes</title>
+<!-- SCRIPTS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="lib/d3.js"></script>
+	<script src="lib/d3-legend.js"></script>
+  	<script src="https://d3js.org/d3.v4.min.js"></script>
+
+  	</head>
+
+  	<body>
+  		<div id="methodology">&larr; <a href="index.html">Return to site</a></div>
+
+  			<div class="row">
+  				<div class="col-md-8 col-md-offset-2">
+			      	<div id="sections">
+			      		<section>
+					    	<br /> <!-- $remove -->
+				            <br />
+				            <br />
+				            <br />
+				            <br />
+					      	<h1 id="title">Methodology</h1>
+					      	<br /> <!-- $remove -->
+				            <br />
+					    </section>
+
+  					<p>We used public data to create all visualizations and calculations displayed here, and links to each dataset are provided where possible. For each of the primary visualizations, we have also provided our methodology and thinking behind how the data was parsed. Unless otherwise noted, all information is presented at the county level. The data used was the most recent available as of June 2017.</p>
+  					<p>&nbsp;</p>
+
+  					<h4>1. % of Renter Households that are Rent Burdened</h4>
+  					<p>In line with HUD definitions and other generally accepted standards, a household that is rent burdened pays 30% or more of their income in rent. While this standard has been critiqued, often for good reason, it remains the recognized standard and a useful means in which to capture a general idea of renters’ struggles with housing costs.</p>
+  					<p class="source">Data source: American Community Survey, 2015, 5-Year Estimates, US Census Bureau, Table T103. Gross Rent as a Percentage of Household Income in 2015</p>
+
+  					<h4>2. # of Housing Choice Vouchers</h4>
+  					<p>To get the number of housing choice vouchers in any given county, we used HUD data on the location of vouchers, aggregated to the census tract level. We then aggregated that information up to the county level.</p>
+  					<p class="source">Data source: <a href="https://catalog.data.gov/dataset/assisted-housing-housing-choice-vouchers-by-tract">Assisted Housing - Housing Choice Vouchers by Tract - National Geospatial Data Asset (NGDA)</a>
+
+  					<h4>3. Rural and Urban</h4>
+  					<p>In each decennial census, the Census Bureau defines different areas as rural or urban. It then uses that information to classify counties, among other geographies, as mostly rural (called rural counties here) or mostly urban (called urban counties here).</p>
+  					<p class="source">Data source: <a href="https://www.census.gov/geo/reference/urban-rural.html">Decennial Census, 2010, US Census Bureau, County Classification Lookup Table</a>.
+
+  					<h4>4. # of Housing Choice Vouchers per 100 Households</h4>
+  					<p>This map takes the number of housing choice vouchers in each county, calculated as noted above, and divides it by the number of households in the county (then normalizes it to show how many vouchers are available per 100 households).</p>
+  					<p class="source">Data sources: <a href="https://catalog.data.gov/dataset/assisted-housing-housing-choice-vouchers-by-tract">Assisted Housing - Housing Choice Vouchers by Tract - National Geospatial Data Asset (NGDA)</a>; American Community Survey, 2015, 5-Year Estimates, US Census Bureau.
+
+   					<h4>5. Trump vs. Clinton Margin of Victory</h4>
+  					<p>The margin of victory was calculated by taking the percentage of the vote received by Trump in the 2016 presidential election and subtracting it from Clinton.</p>
+  					<p class="source">Data source: <a href="https://ropercenter.cornell.edu/polls/us-elections/presidential-elections/2016election/">Cornell University’s Roper Center for Public Opinion Research</a>.
+
+  					<h4>6. % of County Households that are Eligible and Housing Cost-Burdened but Unserved</h4>
+  					<p>To be eligible to receive a housing choice voucher, you must make less than 50% of the local Area Median Income (AMI) or, as it is referred to by HUD in some of its datasets, HUD Area Median Family Income (HAMFI).  Using HUD’s Comprehensive Housing Affordability Strategy (CHAS) dataset (a custom tabulation of US Census data), we found the total count of households (both renter- and owner-occupied) making less than 50% of the HAMFI who were also housing cost burdened (T8 columns in the data) to find each county’s total universe of eligible households that are cost-burdened.</p>
+  					<p>We then wanted to account for the number of households in that universe that could be said to be served by housing choice vouchers or one of the other main federally sponsored housing assistance programs: public housing or project-based Section 8 housing. Accordingly, we used the housing choice vouchers numbers noted above along with HUD’s Picture of Subsidized Housing dataset to subtract the number of vouchers, public housing units, and project-based Section 8 units in each country from the total number of eligible households that are cost-burdened. That count—the number of households that are eligible for housing choice vouchers, housing cost-burdened, and unserved by any of the three main forms of federally supported subsidized housing—was then divided by the total number of households in the county to find the relevant percentage then mapped.</p>
+  					<p>This measure is a representation of the magnitude of the need for housing assistance in each country and illustrates the relative size of the vulnerable but unserved population in each county to its total population.</p>
+  					<p class="source">Data sources: <a href="https://catalog.data.gov/dataset/assisted-housing-housing-choice-vouchers-by-tract">Assisted Housing - Housing Choice Vouchers by Tract - National Geospatial Data Asset (NGDA)</a>; American Community Survey, 2015, 5-Year Estimates, US Census Bureau.</a>; American Community Survey, 2015, 5-Year Estimates, US Census Bureau; <a href="https://www.huduser.gov/portal/datasets/cp.html">Comprehensive Housing Affordability Strategy dataset, HUD &amp; US Census Bureau</a>; <a href="https://www.huduser.gov/portal/datasets/assthsg.html">Picture of Subsidized Households dataset, HUD</a>.
+
+  					<h4>7. % of Eligible Population Unserved and Served vs. Unserved</h4>
+  					<p>This map and visualization uses the same data as map #4 above. Instead of showing the eligible and unserved population as a percentage of the total county population, however, it shows the share of all eligible and housing cost burdened households that do not receive assistance from the voucher program, public housing, or project-based Section 8. It foregrounds those households that remain unassisted.</p>
+  					<p>The bubble visualization that’s paired with this map shows the number of housing choice vouchers in the “served” category (note that public housing and project-based section 8 are not included here) and all eligible and housing cost-burdened households that are not served by the voucher program, public housing, or project-based Section 8 in the “unserved” category.</p>
+  					<p class="source">Data sources: <a href="https://catalog.data.gov/dataset/assisted-housing-housing-choice-vouchers-by-tract">Assisted Housing - Housing Choice Vouchers by Tract - National Geospatial Data Asset (NGDA)</a>; American Community Survey, 2015, 5-Year Estimates, US Census Bureau.</a>; American Community Survey, 2015, 5-Year Estimates, US Census Bureau; <a href="https://www.huduser.gov/portal/datasets/cp.html">Comprehensive Housing Affordability Strategy dataset, HUD &amp; US Census Bureau</a>; <a href="https://www.huduser.gov/portal/datasets/assthsg.html">Picture of Subsidized Households dataset, HUD</a>.
+
+
+
+
+
+
+
+  				</div>
+  			</div>
+  		</div>
+
+
+
+
+  	</body>
